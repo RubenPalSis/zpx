@@ -21,6 +21,7 @@ const translations = {
         nav_services: "Servicios",
         nav_about: "Nosotros",
         nav_contact: "Contacto",
+        nav_qr_tool: "Herramienta QR",
         hero_title: "Estudio de Innovación Digital",
         hero_subtitle: "Creamos soluciones digitales personalizadas, desde aplicaciones web y móviles hasta códigos QR interactivos y diseños visuales impresionantes.",
         hero_cta: "Inicia Tu Proyecto",
@@ -50,16 +51,38 @@ const translations = {
         projects_title: "Nuestros Proyectos",
         projects_subtitle: "Descubre algunos de nuestros trabajos más recientes",
         project_button: "Ver Proyecto",
+        project_app_button: "Ver App",
+        project_1_title: "BarberShop",
+        project_1_desc: "Sitio web moderno para barbería con sistema de reservas online.",
+        project_2_title: "BasketStats",
+        project_2_desc: "App para Estadísticas de Baloncesto.",
         form_message: "Mensaje",
         form_submitting: "Enviando...",
         form_success: "Mensaje Enviado",
         footer_description: "Creamos soluciones digitales personalizadas, desde aplicaciones web hasta códigos QR interactivos y diseños visuales impresionantes.",
-        footer_copyright: "© 2025 ZPX Studio. Todos los derechos reservados."
+        footer_copyright: "© 2025 ZPX Studio. Todos los derechos reservados.",
+        chat_title: "ZPX Studio",
+        chat_welcome: "¡Hola! ¿Con quién deseas contactar?",
+        chat_contact_selected: "Perfecto, has seleccionado contactar con",
+        chat_contact_methods: "¿Cómo deseas contactar?",
+        chat_redirecting: "Perfecto, redirigiendo a",
+        chat_call: "Llamar",
+        chat_email: "Email",
+        chat_open: "Abrir",
+        chat_phone_call: "Llamada telefónica",
+        chat_email_method: "Correo electrónico",
+        form_error_name: "El nombre es requerido",
+        form_error_email: "El correo electrónico es requerido",
+        form_error_email_invalid: "Dirección de correo electrónico inválida",
+        form_error_subject: "El asunto es requerido",
+        form_error_message: "El mensaje es requerido",
+        form_success_message: "¡Tu mensaje ha sido enviado exitosamente!"
     },
     en: {
         nav_services: "Services",
         nav_about: "About Us",
         nav_contact: "Contact",
+        nav_qr_tool: "QR Tool",
         hero_title: "Digital Innovation Studio",
         hero_subtitle: "We create custom digital solutions, from web and mobile applications to interactive QR codes and stunning visual designs.",
         hero_cta: "Start Your Project",
@@ -73,11 +96,8 @@ const translations = {
         service_3_desc: "Modern, intuitive interfaces designed with the user in mind.",
         about_title: "About Us",
         about_subtitle: "Get to know the team behind ZPX Studio",
-        about_desc: "We are two friends passionate about computing, Rubén Palacio and David Giménez. Although we are young in the sector, we are excited to create custom digital solutions for small and medium-sized businesses, adapting to what they really need. We are dedicated to combining creativity, technology and commitment to help each project stand out and meet its objectives in the digital world. Each client is for us an opportunity to learn, grow and add real value to their business.",
+        about_desc: "We are two friends passionate about computing, Rubén Palacio and David Giménez, founders of our own digital innovation studio. Although we are young in the sector, we are excited to create custom digital solutions for small and medium-sized businesses, adapting to what they really need. We are dedicated to combining creativity, technology and commitment to help each project stand out and meet its objectives in the digital world. Each client is for us an opportunity to learn, grow and add real value to their business.",
         ruben_name: "Rubén Palacio",
-        projects_title: "Our Projects",
-        projects_subtitle: "Discover some of our recent works",
-        project_button: "View Project",
         ruben_role: "Full Stack Developer",
         david_name: "David Giménez",
         david_role: "UI/UX Designer",
@@ -89,11 +109,35 @@ const translations = {
         form_name: "Name",
         form_email: "Email",
         form_subject: "Subject",
+        projects_title: "Our Projects",
+        projects_subtitle: "Discover some of our recent works",
+        project_button: "View Project",
+        project_app_button: "View App",
+        project_1_title: "BarberShop",
+        project_1_desc: "Modern website for barbershop with online booking system.",
+        project_2_title: "BasketStats",
+        project_2_desc: "Basketball Statistics App.",
         form_message: "Message",
         form_submitting: "Sending...",
         form_success: "Message Sent",
         footer_description: "We create custom digital solutions, from web applications to interactive QR codes and stunning visual designs.",
-        footer_copyright: "© 2025 ZPX Studio. All rights reserved."
+        footer_copyright: "© 2025 ZPX Studio. All rights reserved.",
+        chat_title: "ZPX Studio",
+        chat_welcome: "Hello! Who would you like to contact?",
+        chat_contact_selected: "Great, you've selected to contact",
+        chat_contact_methods: "How would you like to contact?",
+        chat_redirecting: "Great, redirecting to",
+        chat_call: "Call",
+        chat_email: "Email",
+        chat_open: "Open",
+        chat_phone_call: "Phone call",
+        chat_email_method: "Email",
+        form_error_name: "Name is required",
+        form_error_email: "Email is required",
+        form_error_email_invalid: "Invalid email address",
+        form_error_subject: "Subject is required",
+        form_error_message: "Message is required",
+        form_success_message: "Your message has been sent successfully!"
     }
 };
 
@@ -190,12 +234,7 @@ function handleFormSubmit(e) {
     
     setTimeout(() => {
         contactForm.reset();
-        showToast(
-            currentLanguage === 'es' 
-                ? '¡Tu mensaje ha sido enviado exitosamente!' 
-                : 'Your message has been sent successfully!', 
-            'success'
-        );
+        showToast(translations[currentLanguage].form_success_message, 'success');
         submitBtn.disabled = false;
         submitBtn.textContent = translations[currentLanguage].form_submit;
     }, 2000);
@@ -209,25 +248,25 @@ function validateForm(name, email, subject, message) {
     });
     
     if (!name) {
-        showFieldError('name', currentLanguage === 'es' ? 'El nombre es requerido' : 'Name is required');
+        showFieldError('name', translations[currentLanguage].form_error_name);
         isValid = false;
     }
     
     if (!email) {
-        showFieldError('email', currentLanguage === 'es' ? 'El correo electrónico es requerido' : 'Email is required');
+        showFieldError('email', translations[currentLanguage].form_error_email);
         isValid = false;
     } else if (!isValidEmail(email)) {
-        showFieldError('email', currentLanguage === 'es' ? 'Dirección de correo electrónico inválida' : 'Invalid email address');
+        showFieldError('email', translations[currentLanguage].form_error_email_invalid);
         isValid = false;
     }
     
     if (!subject) {
-        showFieldError('subject', currentLanguage === 'es' ? 'El asunto es requerido' : 'Subject is required');
+        showFieldError('subject', translations[currentLanguage].form_error_subject);
         isValid = false;
     }
     
     if (!message) {
-        showFieldError('message', currentLanguage === 'es' ? 'El mensaje es requerido' : 'Message is required');
+        showFieldError('message', translations[currentLanguage].form_error_message);
         isValid = false;
     }
     
@@ -321,9 +360,7 @@ function closeChat() {
 }
 
 function startConversation() {
-    addBotMessage(currentLanguage === 'es' 
-        ? '¡Hola! ¿Con quién deseas contactar?' 
-        : 'Hello! Who would you like to contact?');
+    addBotMessage(translations[currentLanguage].chat_welcome);
     
     showTypingIndicator();
     
@@ -405,9 +442,7 @@ function selectContact(contactKey) {
 function showContactMethods() {
     const contact = currentContact;
     
-    addBotMessage(currentLanguage === 'es' 
-        ? `Perfecto, has seleccionado contactar con ${contact.name}. ¿Cómo deseas contactar?` 
-        : `Great, you've selected to contact ${contact.name}. How would you like to contact?`);
+    addBotMessage(`${translations[currentLanguage].chat_contact_selected} ${contact.name}. ${translations[currentLanguage].chat_contact_methods}`);
     
     const optionsDiv = document.createElement('div');
     optionsDiv.className = 'contact-options';
@@ -418,7 +453,7 @@ function showContactMethods() {
         <svg viewBox="0 0 24 24">
             <path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
         </svg>
-        ${currentLanguage === 'es' ? 'Llamar' : 'Call'}
+        ${translations[currentLanguage].chat_call}
     `;
     phoneOption.addEventListener('click', () => selectContactMethod('phone'));
     
@@ -428,7 +463,7 @@ function showContactMethods() {
         <svg viewBox="0 0 24 24">
             <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
         </svg>
-        ${currentLanguage === 'es' ? 'Email' : 'Email'}
+        ${translations[currentLanguage].chat_email}
     `;
     emailOption.addEventListener('click', () => selectContactMethod('email'));
     
@@ -487,7 +522,7 @@ function selectContactMethod(method) {
             redirectUrl = `tel:${contact.phone}`;
             break;
         case 'email':
-            methodText = currentLanguage === 'es' ? 'Correo electrónico' : 'Email';
+            methodText = translations[currentLanguage].chat_email_method;
             redirectUrl = `mailto:${contact.email}`;
             break;
         case 'linkedin':
@@ -515,15 +550,11 @@ function selectContactMethod(method) {
 }
 
 function showRedirectButton(method, url, contactName) {
-    addBotMessage(currentLanguage === 'es' 
-        ? `Perfecto, redirigiendo a ${method} de ${contactName}` 
-        : `Great, redirecting to ${method} for ${contactName}`);
+    addBotMessage(`${translations[currentLanguage].chat_redirecting} ${method} ${currentLanguage === 'es' ? 'de' : 'for'} ${contactName}`);
     
     const redirectButton = document.createElement('button');
     redirectButton.className = 'redirect-button';
-    redirectButton.textContent = currentLanguage === 'es' 
-        ? `Abrir ${method}` 
-        : `Open ${method}`;
+    redirectButton.textContent = `${translations[currentLanguage].chat_open} ${method}`;
     
     redirectButton.addEventListener('click', () => {
         window.open(url, '_blank');
@@ -541,6 +572,7 @@ function scrollToBottom() {
 function updateLanguage() {
     const t = translations[currentLanguage];
     
+    // Update navigation
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks[0].textContent = t.nav_services;
     navLinks[1].textContent = t.nav_about;
@@ -549,12 +581,15 @@ function updateLanguage() {
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
     mobileNavLinks[0].textContent = t.nav_services;
     mobileNavLinks[1].textContent = t.nav_about;
-    mobileNavLinks[2].textContent = t.nav_contact;
+    mobileNavLinks[2].textContent = t.nav_qr_tool;
+    mobileNavLinks[3].textContent = t.nav_contact;
     
+    // Update hero section
     document.querySelector('.hero-title').textContent = t.hero_title;
     document.querySelector('.hero-subtitle').textContent = t.hero_subtitle;
     document.querySelector('.cta-button').innerHTML = `${t.hero_cta} <svg class="arrow-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>`;
     
+    // Update services section
     document.querySelector('.services-section .section-title').textContent = t.services_title;
     document.querySelector('.services-section .section-subtitle').textContent = t.services_subtitle;
     
@@ -568,8 +603,8 @@ function updateLanguage() {
     serviceDescriptions[1].textContent = t.service_2_desc;
     serviceDescriptions[2].textContent = t.service_3_desc;
     
+    // Update about section
     document.querySelector('.about-section .section-title').textContent = t.about_title;
-    document.querySelector('.about-section .section-subtitle').textContent = t.about_subtitle;
     document.querySelector('.about-text p').textContent = t.about_desc;
     
     const founderNames = document.querySelectorAll('.founder-name');
@@ -580,6 +615,23 @@ function updateLanguage() {
     founderRoles[0].textContent = t.ruben_role;
     founderRoles[1].textContent = t.david_role;
     
+    // Update projects section
+    document.querySelector('.projects-section .section-title').textContent = t.projects_title;
+    document.querySelector('.projects-section .section-subtitle').textContent = t.projects_subtitle;
+    
+    const projectTitles = document.querySelectorAll('.project-title');
+    projectTitles[0].textContent = t.project_1_title;
+    projectTitles[1].textContent = t.project_2_title;
+    
+    const projectDescriptions = document.querySelectorAll('.project-description');
+    projectDescriptions[0].textContent = t.project_1_desc;
+    projectDescriptions[1].textContent = t.project_2_desc;
+    
+    const projectButtons = document.querySelectorAll('.project-button');
+    projectButtons[0].innerHTML = `${t.project_button} <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>`;
+    projectButtons[1].innerHTML = `${t.project_app_button} <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>`;
+    
+    // Update contact section
     document.querySelector('.contact-section .section-title').textContent = t.contact_title;
     document.querySelector('.contact-section .section-subtitle').textContent = t.contact_subtitle;
     document.querySelector('.contact-info h3').textContent = t.contact_info;
@@ -589,20 +641,20 @@ function updateLanguage() {
     document.querySelector('label[for="email"]').textContent = t.form_email;
     document.querySelector('label[for="subject"]').textContent = t.form_subject;
     document.querySelector('label[for="message"]').textContent = t.form_message;
-    document.querySelector('.projects-section .section-title').textContent = t.projects_title;
-    document.querySelector('.projects-section .section-subtitle').textContent = t.projects_subtitle;
     
-    document.querySelectorAll('.project-button').forEach(button => {
-        button.innerHTML = `${t.project_button} <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>`;
-    });
     const submitBtn = document.querySelector('.submit-button');
     if (submitBtn) {
         submitBtn.textContent = t.form_submit;
     }
     
+    // Update footer
     document.querySelector('.footer-description').textContent = t.footer_description;
     document.querySelector('.footer-bottom p').textContent = t.footer_copyright;
     
+    // Update chat title
+    document.querySelector('.chat-header h3').textContent = t.chat_title;
+    
+    // Update page title
     document.title = currentLanguage === 'es' ? 'ZPX Studio - Innovación Digital' : 'ZPX Studio - Digital Innovation';
 }
 
