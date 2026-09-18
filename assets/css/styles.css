@@ -1047,6 +1047,17 @@ body.intro-lock {
     resize: vertical;
 }
 
+/* Fuera de pantalla en vez de display:none: los robots que interpretan CSS
+   saltan lo que está oculto, y aquí lo que queremos es justo que lo rellenen. */
+.honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
 .error-message {
     color: var(--danger);
     font-size: 0.8125rem;

@@ -472,6 +472,12 @@
                     <div class="card contact-form-card reveal">
                         <h3 class="card-title" data-i18n="form_send_message">Envíanos un mensaje</h3>
                         <form id="contact-form" action="https://formspree.io/f/xyezgrro" method="POST" novalidate>
+                            <!-- Trampa antispam de Formspree: los robots rellenan todos los campos
+                                 que encuentran, así que cualquier envío que traiga esto relleno se
+                                 descarta. Queda fuera de pantalla, del tabulador y del lector de
+                                 pantalla, de modo que una persona nunca llega a verlo. -->
+                            <input type="text" name="_gotcha" class="honeypot" tabindex="-1"
+                                autocomplete="off" aria-hidden="true">
                             <div class="form-group">
                                 <label for="name" class="form-label" data-i18n="form_name">Nombre</label>
                                 <input type="text" id="name" name="name" class="form-input" autocomplete="name"
