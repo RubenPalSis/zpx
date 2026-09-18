@@ -5,43 +5,92 @@
 /* ---------- Traducciones ---------- */
 const translations = {
     es: {
-        page_title: 'ZetaWeb — Estudio de Innovación Digital',
+        page_title: 'Diseño web en Zaragoza | Páginas web desde 80 € | ZetaWeb',
         skip_link: 'Saltar al contenido',
         menu_open: 'Abrir menú',
         menu_close: 'Cerrar menú',
         theme_toggle: 'Cambiar tema',
         logo_home: 'ZetaWeb — ir al inicio',
         lang_switch: 'Switch to English',
-
         nav_services: 'Servicios',
+        nav_audience: 'Para quién',
         nav_projects: 'Proyectos',
+        nav_process: 'Cómo trabajamos',
         nav_pricing: 'Tarifas',
+        nav_faq: 'Preguntas',
         nav_about: 'Nosotros',
         nav_contact: 'Contacto',
-
-        hero_eyebrow: 'Disponibles para nuevos proyectos',
-        hero_title: 'Estudio de Innovación Digital',
+        hero_eyebrow: 'Diseño web en Zaragoza · Disponibles para nuevos proyectos',
+        hero_title: 'Diseño de páginas web en Zaragoza',
         hero_subtitle:
-            'Creamos soluciones digitales personalizadas, desde aplicaciones web y móviles hasta códigos QR interactivos y diseños visuales impresionantes.',
-        hero_cta: 'Inicia Tu Proyecto',
-        hero_cta_secondary: 'Ver nuestro trabajo',
+            'Creamos páginas web profesionales, rápidas y adaptadas al móvil para autónomos, pequeños negocios y empresas de Zaragoza y alrededores. Presupuesto cerrado desde 80 €, sin compromiso.',
+        hero_cta: 'Pedir presupuesto',
+        hero_cta_secondary: 'Ver proyectos web',
+        cta_whatsapp: 'Escríbenos por WhatsApp',
+        cta_call: 'Llamar al 615 906 268',
         stat_1_label: 'Clientes atendidos',
-        stat_2_label: 'Plataformas',
-        stat_2_value: 'Web · iOS · Android',
+        stat_2_label: 'Zona de trabajo',
+        stat_2_value: 'Zaragoza y alrededores',
         stat_3_label: 'Respuesta media',
         stat_3_value: 'Menos de 24 h',
-
-        services_title: 'Nuestros Servicios',
-        services_subtitle: 'Ofrecemos una amplia gama de servicios digitales para dar vida a tus ideas.',
-        service_1_title: 'Desarrollo Web',
-        service_1_desc: 'Sitios web y aplicaciones web personalizadas construidas con tecnologías modernas.',
-        service_2_title: 'Soluciones QR',
-        service_2_desc: 'Códigos QR personalizados con seguimiento, análisis y contenido dinámico.',
-        service_3_title: 'Diseño UI/UX',
-        service_3_desc: 'Interfaces modernas e intuitivas diseñadas pensando en el usuario.',
-
-        projects_title: 'Nuestros Proyectos',
-        projects_subtitle: 'Descubre algunos de nuestros trabajos más recientes',
+        services_title: 'Servicios de diseño y desarrollo web en Zaragoza',
+        services_subtitle:
+            'Todo lo que necesitas para tener presencia online, desde la primera página hasta el mantenimiento del día a día.',
+        service_1_title: 'Creación de páginas web',
+        service_1_desc:
+            'Diseñamos y programamos tu web desde cero, a medida de lo que haces, sin plantillas recicladas ni páginas cargadas de relleno.',
+        service_2_title: 'Páginas web para autónomos y pequeños negocios',
+        service_2_desc:
+            'Una web sencilla y profesional donde explicar tus servicios, enseñar tu trabajo y que te puedan llamar en dos toques.',
+        service_3_title: 'Rediseño de páginas web antiguas',
+        service_3_desc:
+            'Si tu web tiene años, la modernizamos: aspecto actual, carga rápida y un diseño responsive que funcione de verdad en el móvil.',
+        service_4_title: 'Diseño UI/UX',
+        service_4_desc:
+            'Interfaces claras y fáciles de usar, pensadas para que quien entra encuentre lo que busca y acabe contactando contigo.',
+        service_5_title: 'Desarrollo de aplicaciones móviles',
+        service_5_desc:
+            'Apps para iOS y Android cuando tu negocio necesita algo más que una web, con la publicación en Play Store incluida.',
+        service_6_title: 'Mantenimiento web y códigos QR',
+        service_6_desc:
+            'Nos ocupamos de las actualizaciones, las copias de seguridad y los cambios de contenido. También hacemos códigos QR con seguimiento para cartas o escaparate.',
+        audience_title: 'Páginas web para autónomos y pequeños negocios',
+        audience_subtitle:
+            'Trabajamos sobre todo con negocios pequeños de Zaragoza, donde una buena web se nota en el teléfono desde la primera semana.',
+        audience_1_title: 'Autónomos y profesionales',
+        audience_1_desc:
+            'Trabajas por tu cuenta y ahora mismo sólo te encuentran por el boca a boca o por redes sociales. Te montamos un sitio propio que explique qué haces y facilite que te escriban.',
+        audience_2_title: 'Pequeños negocios y comercios',
+        audience_2_desc:
+            'Tienes local y clientela, pero cuando alguien te busca en Google no aparece nada claro. Una web con tus servicios, horarios y contacto cambia esa primera impresión.',
+        audience_3_title: 'Empresas con una web antigua',
+        audience_3_desc:
+            'La web se hizo hace años, se ve mal en el móvil y da pereza enseñarla. La renovamos partiendo de lo que ya tienes, sin empezar de cero si no hace falta.',
+        audience_4_title: 'Clubes y asociaciones',
+        audience_4_desc:
+            'Equipos y entidades que necesitan publicar calendarios, resultados o actividades, y tenerlo todo ordenado en un mismo sitio.',
+        audience_note_1: 'Si no te reconoces en ninguno, cuéntanoslo igual: puedes mirar nuestros',
+        audience_note_services: 'servicios de diseño web',
+        audience_note_2: ', los',
+        audience_note_projects: 'proyectos que hemos publicado',
+        audience_note_3: 'o los',
+        audience_note_pricing: 'precios de las páginas web',
+        projects_title: 'Proyectos de diseño web',
+        projects_subtitle:
+            'Portfolio de webs y aplicaciones publicadas y funcionando. Entra en cualquiera y juzga tú mismo.',
+        project_barber_desc: 'Diseño web para una barbería: sus servicios y el contacto siempre a la vista.',
+        project_tapicerias_desc:
+            'Diseño web para una empresa de tapicería de Zaragoza, con sus trabajos, el presupuesto y un enlace directo a Instagram.',
+        project_terma_desc:
+            'Página web para una empresa de climatización: aire acondicionado, calefacción y ventilación, con petición de presupuesto.',
+        project_quiro_desc:
+            'Página web para un centro de quiromasaje de Zaragoza. Estamos con el rediseño: puedes comparar la actual con la versión nueva.',
+        project_dominicos_desc:
+            'Web para un club de baloncesto de Zaragoza, con sus equipos y categorías, también en pleno rediseño.',
+        project_gestionateam_desc:
+            'Aplicación web para entrenadores: gestión de equipos, entrenamientos y partidos desde el móvil.',
+        project_basketstats_desc:
+            'App Android publicada en Play Store para llevar las estadísticas en directo durante los partidos.',
         btn_visit_site: 'Ver web',
         btn_new_version: 'Versión nueva',
         btn_instagram: 'Instagram',
@@ -52,15 +101,28 @@ const translations = {
         tag_pwa: 'PWA iOS / Android',
         tag_maintenance: 'Mantenimiento',
         tag_redesign: 'Rediseño en curso',
-
-        pricing_title: 'Tarifas',
+        process_title: 'Cómo trabajamos',
+        process_subtitle: 'Cuatro pasos, sin letra pequeña y sin sorpresas en la factura.',
+        process_1_title: 'Nos cuentas tu idea',
+        process_1_desc:
+            'Por WhatsApp, por teléfono o con el formulario. Nos dices a qué te dedicas y qué esperas conseguir con la web.',
+        process_2_title: 'Presupuesto cerrado',
+        process_2_desc:
+            'Te pasamos el precio, el plazo y lo que incluye antes de empezar. Si no te encaja, no hay compromiso ninguno.',
+        process_3_title: 'Diseño y desarrollo',
+        process_3_desc:
+            'Trabajamos la web pensando primero en el móvil y te vamos enseñando avances para que puedas corregir sobre la marcha.',
+        process_4_title: 'Publicación y soporte',
+        process_4_desc:
+            'La dejamos publicada y lista para que Google la encuentre. A partir de ahí puedes llevarla tú o dejarnos el mantenimiento.',
+        pricing_title: 'Precios de páginas web',
         pricing_subtitle:
             'Precios de partida orientativos. El presupuesto final depende del alcance de cada proyecto.',
         price_from: 'desde',
         price_per_month: '/mes',
         price_cta: 'Pedir presupuesto',
         price_web_title: 'Página web',
-        price_web_desc: 'Diseño y desarrollo a medida, adaptado a móvil y preparado para buscadores.',
+        price_web_desc: 'Diseño y desarrollo a medida, con diseño responsive y preparada para buscadores.',
         price_app_title: 'App a medida',
         price_app_desc:
             'Aplicación para iOS y Android, con la licencia de publicación en Play Store incluida.',
@@ -68,18 +130,48 @@ const translations = {
         price_maintenance_desc: 'Actualizaciones de contenido, copias de seguridad y soporte continuo.',
         price_note:
             '¿Tu proyecto necesita algo distinto? Cuéntanoslo y te preparamos un presupuesto cerrado sin compromiso.',
-
-        about_title: 'Sobre Nosotros',
+        faq_title: 'Preguntas frecuentes sobre diseño web',
+        faq_subtitle: 'Lo que nos preguntan casi siempre antes de empezar.',
+        faq_1_q: '¿Cuánto cuesta hacer una página web?',
+        faq_1_a:
+            'Partimos de 80 € para una web sencilla de presentación. Antes de empezar te pasamos un presupuesto cerrado, para que sepas el precio exacto desde el principio. El importe final depende del número de páginas y de las funciones que necesites.',
+        faq_2_q: '¿Cuánto se tarda en tener la web publicada?',
+        faq_2_a:
+            'Depende del tamaño del proyecto y, sobre todo, de lo rápido que llegue el material: textos, fotos y logo. Una web sencilla de presentación avanza rápido. El plazo concreto te lo damos junto con el presupuesto, antes de ponernos a trabajar.',
+        faq_3_q: '¿Trabajáis con autónomos y negocios pequeños?',
+        faq_3_a:
+            'Es la mayor parte de lo que hacemos. Los proyectos del portfolio son de profesionales, negocios pequeños y clubes, no de grandes empresas, y las tarifas están pensadas para que una web deje de ser un gasto inalcanzable.',
+        faq_4_q: '¿Trabajáis sólo en Zaragoza?',
+        faq_4_a:
+            'Trabajamos sobre todo con negocios de Zaragoza y alrededores, que es donde podemos vernos en persona si hace falta. Para el resto de Aragón, o más lejos, el proyecto se lleva igual de bien a distancia.',
+        faq_5_q: 'Ya tengo una web antigua, ¿podéis rediseñarla?',
+        faq_5_a:
+            'Sí. El rediseño es parte de lo que hacemos: partimos de lo que ya tienes, conservamos lo que funciona y actualizamos el diseño, la velocidad y la versión móvil. Ahora mismo tenemos dos rediseños en curso.',
+        faq_6_q: '¿Qué necesito para empezar?',
+        faq_6_a:
+            'Con que nos cuentes a qué te dedicas y qué quieres conseguir con la web es suficiente. Si tienes textos, fotos o logo, todo va más rápido; y si no los tienes, te ayudamos a prepararlos.',
+        faq_7_q: '¿La página se verá bien en el móvil?',
+        faq_7_a:
+            'Sí. Diseñamos pensando primero en el móvil, porque es desde donde entra la mayoría de las visitas, y después comprobamos que se vea igual de bien en tablet y en ordenador.',
+        faq_8_q: '¿Qué pasa después de publicar la web?',
+        faq_8_a:
+            'La web es tuya. Si quieres despreocuparte de las actualizaciones, las copias de seguridad y los cambios de contenido, tenemos mantenimiento por 50 € al mes; y si prefieres llevarla tú, también.',
+        faq_9_q: '¿También hacéis aplicaciones móviles?',
+        faq_9_a:
+            'Sí, desarrollamos apps para iOS y Android desde 150 €, con la licencia de publicación en Play Store incluida. En el portfolio puedes ver BasketStats y GestionaTeam.',
+        about_title: 'Sobre ZetaWeb',
         about_subtitle: 'Conoce al equipo detrás de ZetaWeb',
         about_desc:
-            'Somos un equipo apasionado por la tecnología: Rubén Palacio e Ines Capdevila. Nos entusiasma crear soluciones digitales a medida para pequeñas y medianas empresas, adaptándonos a lo que realmente necesitan. Combinamos creatividad, tecnología y compromiso para que cada proyecto destaque y cumpla sus objetivos en el mundo digital. Cada cliente es para nosotros una oportunidad de aprender, crecer y aportar valor real a su negocio.',
+            'Somos un equipo apasionado por la tecnología: Rubén Palacio e Ines Capdevila. Creamos páginas web y aplicaciones a medida para autónomos, pequeños negocios y empresas de Zaragoza, adaptándonos a lo que realmente necesitan y a lo que pueden gastarse. Nos gusta el trato directo: hablas con quien diseña y programa tu web, sin intermediarios ni departamentos de por medio. Cada cliente es para nosotros una oportunidad de aprender, crecer y aportar valor real a su negocio.',
         ruben_role: 'Desarrollador Full Stack',
         ines_role: 'Desarrollo de Negocio y Redes Sociales',
-
-        contact_title: 'Ponte en Contacto',
-        contact_subtitle: '¿Listo para comenzar tu proyecto? Contáctanos hoy.',
+        contact_title: 'Contacto',
+        contact_subtitle:
+            'Cuéntanos tu proyecto por WhatsApp o rellena el formulario. Te respondemos normalmente en menos de 24 horas, sin compromiso.',
         contact_info: 'Información de Contacto',
         contact_portfolio: 'Portfolio online',
+        contact_area:
+            'Trabajamos con negocios de Zaragoza capital y alrededores, y también a distancia para el resto de Aragón.',
         form_send_message: 'Envíanos un mensaje',
         form_name: 'Nombre',
         form_email: 'Correo Electrónico',
@@ -94,13 +186,20 @@ const translations = {
         form_error_message: 'El mensaje es obligatorio',
         form_success_message: '¡Tu mensaje se ha enviado correctamente!',
         form_network_error: 'No hemos podido enviar el mensaje. Inténtalo de nuevo o escríbenos por email.',
-
         footer_description:
-            'Creamos soluciones digitales personalizadas, desde aplicaciones web hasta códigos QR interactivos y diseños visuales impresionantes.',
-        footer_copyright: '© 2025 ZetaWeb. Todos los derechos reservados.',
-
-        chat_open_label: 'Abrir chat de contacto',
+            'Diseño y creación de páginas web en Zaragoza para autónomos, pequeños negocios y empresas. También desarrollamos aplicaciones móviles y mantenemos webs ya publicadas.',
+        foot_services: 'Servicios de diseño web',
+        foot_audience: 'Páginas web para autónomos',
+        foot_projects: 'Proyectos de diseño web',
+        foot_process: 'Cómo trabajamos',
+        foot_pricing: 'Precios de páginas web',
+        foot_faq: 'Preguntas frecuentes',
+        foot_about: 'Sobre ZetaWeb',
+        foot_contact: 'Contacto',
+        footer_copyright: '© 2026 ZetaWeb. Todos los derechos reservados.',
+        chat_open_label: '¿Hablamos? Abrir chat de contacto',
         chat_close_label: 'Cerrar chat',
+        chat_bubble: '¿Hablamos?',
         chat_welcome: '¡Hola! ¿Con quién deseas contactar?',
         chat_contact_selected: 'Perfecto, has seleccionado contactar con',
         chat_contact_methods: '¿Cómo deseas contactar?',
@@ -114,43 +213,92 @@ const translations = {
     },
 
     en: {
-        page_title: 'ZetaWeb — Digital Innovation Studio',
+        page_title: 'Web design in Zaragoza | Websites from €80 | ZetaWeb',
         skip_link: 'Skip to content',
         menu_open: 'Open menu',
         menu_close: 'Close menu',
         theme_toggle: 'Toggle theme',
         logo_home: 'ZetaWeb — go to home',
         lang_switch: 'Cambiar a español',
-
         nav_services: 'Services',
+        nav_audience: 'Who we help',
         nav_projects: 'Projects',
+        nav_process: 'How we work',
         nav_pricing: 'Pricing',
+        nav_faq: 'FAQ',
         nav_about: 'About',
         nav_contact: 'Contact',
-
-        hero_eyebrow: 'Available for new projects',
-        hero_title: 'Digital Innovation Studio',
+        hero_eyebrow: 'Web design in Zaragoza · Available for new projects',
+        hero_title: 'Web design in Zaragoza',
         hero_subtitle:
-            'We create custom digital solutions, from web and mobile applications to interactive QR codes and stunning visual designs.',
-        hero_cta: 'Start Your Project',
-        hero_cta_secondary: 'See our work',
+            'We build professional, fast, mobile-ready websites for freelancers, small businesses and companies in Zaragoza and the surrounding area. Fixed quotes from €80, no strings attached.',
+        hero_cta: 'Request a quote',
+        hero_cta_secondary: 'See our web projects',
+        cta_whatsapp: 'Message us on WhatsApp',
+        cta_call: 'Call +34 615 906 268',
         stat_1_label: 'Clients served',
-        stat_2_label: 'Platforms',
-        stat_2_value: 'Web · iOS · Android',
+        stat_2_label: 'Where we work',
+        stat_2_value: 'Zaragoza and around',
         stat_3_label: 'Average reply',
         stat_3_value: 'Under 24 h',
-
-        services_title: 'Our Services',
-        services_subtitle: 'We offer a comprehensive range of digital services to bring your ideas to life.',
-        service_1_title: 'Web Development',
-        service_1_desc: 'Custom websites and web applications built with modern technologies.',
-        service_2_title: 'QR Solutions',
-        service_2_desc: 'Custom QR codes with tracking, analytics and dynamic content.',
-        service_3_title: 'UI/UX Design',
-        service_3_desc: 'Modern, intuitive interfaces designed with the user in mind.',
-
-        projects_title: 'Our Projects',
-        projects_subtitle: 'Discover some of our most recent work',
+        services_title: 'Web design and development services in Zaragoza',
+        services_subtitle:
+            'Everything you need for a proper online presence, from the first page to the day-to-day upkeep.',
+        service_1_title: 'Website creation',
+        service_1_desc:
+            'We design and build your site from scratch, tailored to what you do — no recycled templates, no filler pages.',
+        service_2_title: 'Websites for freelancers and small businesses',
+        service_2_desc:
+            'A simple, professional site to explain your services, show your work and let people reach you in two taps.',
+        service_3_title: 'Redesign of dated websites',
+        service_3_desc:
+            'If your site is a few years old, we modernise it: current look, fast loading and a responsive design that really works on the phone.',
+        service_4_title: 'UI/UX design',
+        service_4_desc:
+            'Clear, easy interfaces, built so visitors find what they came for and end up getting in touch.',
+        service_5_title: 'Mobile app development',
+        service_5_desc:
+            'iOS and Android apps for when your business needs more than a website, Play Store publishing included.',
+        service_6_title: 'Website maintenance and QR codes',
+        service_6_desc:
+            'We take care of updates, backups and content changes. We also make trackable QR codes for menus or your shop window.',
+        audience_title: 'Websites for freelancers and small businesses',
+        audience_subtitle:
+            'We mostly work with small businesses in Zaragoza, where a good website shows up in the phone line within the first week.',
+        audience_1_title: 'Freelancers and professionals',
+        audience_1_desc:
+            'You work on your own and right now people only find you by word of mouth or social media. We set you up with a place of your own that explains what you do and makes it easy to write to you.',
+        audience_2_title: 'Small businesses and shops',
+        audience_2_desc:
+            'You have a shop and regulars, but when someone searches for you on Google nothing clear shows up. A site with your services, opening hours and contact details changes that first impression.',
+        audience_3_title: 'Companies with a dated website',
+        audience_3_desc:
+            'The site was built years ago, looks poor on mobile and you would rather not show it. We refresh it starting from what you have, without rebuilding from zero unless it is needed.',
+        audience_4_title: 'Clubs and associations',
+        audience_4_desc:
+            'Teams and organisations that need to publish fixtures, results or activities and keep everything in one place.',
+        audience_note_1: 'If none of these sounds like you, tell us anyway: you can look at our',
+        audience_note_services: 'web design services',
+        audience_note_2: ', the',
+        audience_note_projects: 'projects we have published',
+        audience_note_3: 'or the',
+        audience_note_pricing: 'website prices',
+        projects_title: 'Web design projects',
+        projects_subtitle:
+            'A portfolio of websites and apps that are live and running. Open any of them and judge for yourself.',
+        project_barber_desc: 'Web design for a barbershop: its services and contact details always in view.',
+        project_tapicerias_desc:
+            'Web design for an upholstery company in Zaragoza, with their work, quotes and a direct link to Instagram.',
+        project_terma_desc:
+            'Website for an air conditioning company: cooling, heating and ventilation, with a quote request form.',
+        project_quiro_desc:
+            'Website for a massage therapy centre in Zaragoza. The redesign is under way: you can compare the current site with the new version.',
+        project_dominicos_desc:
+            'Website for a basketball club in Zaragoza, with its teams and age groups, also being redesigned right now.',
+        project_gestionateam_desc:
+            'Web app for coaches: managing squads, training sessions and games from the phone.',
+        project_basketstats_desc:
+            'Android app published on the Play Store for keeping live statistics during games.',
         btn_visit_site: 'Visit site',
         btn_new_version: 'New version',
         btn_instagram: 'Instagram',
@@ -161,33 +309,75 @@ const translations = {
         tag_pwa: 'PWA iOS / Android',
         tag_maintenance: 'Maintenance',
         tag_redesign: 'Redesign in progress',
-
-        pricing_title: 'Pricing',
-        pricing_subtitle:
-            'Indicative starting prices. The final quote depends on the scope of each project.',
+        process_title: 'How we work',
+        process_subtitle: 'Four steps, no small print and no surprises on the invoice.',
+        process_1_title: 'You tell us your idea',
+        process_1_desc:
+            'On WhatsApp, over the phone or through the form. You tell us what you do and what you expect the site to bring you.',
+        process_2_title: 'A fixed quote',
+        process_2_desc:
+            'We send you the price, the timeline and what it covers before starting. If it does not suit you, there is no commitment at all.',
+        process_3_title: 'Design and development',
+        process_3_desc:
+            'We build the site mobile-first and show you progress along the way, so you can correct course as we go.',
+        process_4_title: 'Launch and support',
+        process_4_desc:
+            'We publish it, ready for Google to find. From there you can run it yourself or leave the maintenance to us.',
+        pricing_title: 'Website prices',
+        pricing_subtitle: 'Indicative starting prices. The final quote depends on the scope of each project.',
         price_from: 'from',
         price_per_month: '/month',
         price_cta: 'Request a quote',
         price_web_title: 'Website',
-        price_web_desc: 'Custom design and development, mobile-ready and prepared for search engines.',
+        price_web_desc: 'Custom design and development, fully responsive and prepared for search engines.',
         price_app_title: 'Custom app',
         price_app_desc: 'An iOS and Android application, Play Store publishing licence included.',
         price_maintenance_title: 'Website maintenance',
         price_maintenance_desc: 'Content updates, backups and ongoing support.',
         price_note:
             'Need something different? Tell us about it and we will put together a fixed quote, no strings attached.',
-
-        about_title: 'About Us',
+        faq_title: 'Frequently asked questions about web design',
+        faq_subtitle: 'What people almost always ask us before starting.',
+        faq_1_q: 'How much does a website cost?',
+        faq_1_a:
+            'We start at €80 for a simple presentation site. Before any work begins we send you a fixed quote, so you know the exact price from the start. The final figure depends on how many pages and features you need.',
+        faq_2_q: 'How long does it take to get the site live?',
+        faq_2_a:
+            'It depends on the size of the project and, above all, on how quickly the material arrives: texts, photos and logo. A simple presentation site moves fast. We give you the specific timeline together with the quote, before starting work.',
+        faq_3_q: 'Do you work with freelancers and small businesses?',
+        faq_3_a:
+            'That is most of what we do. The projects in the portfolio belong to professionals, small businesses and clubs, not large companies, and the prices are set so a website stops being out of reach.',
+        faq_4_q: 'Do you only work in Zaragoza?',
+        faq_4_a:
+            'We mostly work with businesses in Zaragoza and the surrounding area, where we can meet in person if it helps. For the rest of Aragón, or further away, the project runs just as well remotely.',
+        faq_5_q: 'I already have an old website, can you redesign it?',
+        faq_5_a:
+            'Yes. Redesign is part of what we do: we start from what you have, keep what works and update the design, the speed and the mobile version. We have two redesigns in progress right now.',
+        faq_6_q: 'What do I need to get started?',
+        faq_6_a:
+            'Just tell us what you do and what you want the site to achieve. If you have texts, photos or a logo, everything moves faster; and if you do not, we help you put them together.',
+        faq_7_q: 'Will the page look good on mobile?',
+        faq_7_a:
+            'Yes. We design mobile-first, because that is where most visits come from, and then we check it looks just as good on tablet and desktop.',
+        faq_8_q: 'What happens after the site goes live?',
+        faq_8_a:
+            'The site is yours. If you would rather not deal with updates, backups and content changes, we offer maintenance at €50 a month; and if you prefer to run it yourself, that works too.',
+        faq_9_q: 'Do you also build mobile apps?',
+        faq_9_a:
+            'Yes, we develop iOS and Android apps from €150, with the Play Store publishing licence included. You can see BasketStats and GestionaTeam in the portfolio.',
+        about_title: 'About ZetaWeb',
         about_subtitle: 'Get to know the team behind ZetaWeb',
         about_desc:
-            'We are a team passionate about technology: Rubén Palacio and Ines Capdevila. We love building tailor-made digital solutions for small and medium-sized businesses, adapting to what they actually need. We combine creativity, technology and commitment so every project stands out and meets its goals in the digital world. Each client is an opportunity for us to learn, grow and add real value to their business.',
+            'We are a team passionate about technology: Rubén Palacio and Ines Capdevila. We build tailor-made websites and apps for freelancers, small businesses and companies in Zaragoza, adapting to what they actually need and what they can spend. We like working directly: you talk to the people who design and code your site, with no middlemen and no departments in between. Each client is an opportunity for us to learn, grow and add real value to their business.',
         ruben_role: 'Full Stack Developer',
         ines_role: 'Business Development & Social Media',
-
-        contact_title: 'Get In Touch',
-        contact_subtitle: 'Ready to start your project? Contact us today.',
+        contact_title: 'Contact',
+        contact_subtitle:
+            'Tell us about your project on WhatsApp or fill in the form. We usually reply within 24 hours, no strings attached.',
         contact_info: 'Contact Information',
         contact_portfolio: 'Online portfolio',
+        contact_area:
+            'We work with businesses in Zaragoza and the surrounding area, and remotely across the rest of Aragón.',
         form_send_message: 'Send us a message',
         form_name: 'Name',
         form_email: 'Email',
@@ -201,16 +391,23 @@ const translations = {
         form_error_subject: 'Subject is required',
         form_error_message: 'Message is required',
         form_success_message: 'Your message has been sent successfully!',
-        form_network_error: "We couldn't send your message. Please try again or email us directly.",
-
+        form_network_error: 'We couldn\'t send your message. Please try again or email us directly.',
         footer_description:
-            'We create custom digital solutions, from web applications to interactive QR codes and stunning visual designs.',
-        footer_copyright: '© 2025 ZetaWeb. All rights reserved.',
-
-        chat_open_label: 'Open contact chat',
+            'Web design and development in Zaragoza for freelancers, small businesses and companies. We also build mobile apps and maintain websites that are already live.',
+        foot_services: 'Web design services',
+        foot_audience: 'Websites for freelancers',
+        foot_projects: 'Web design projects',
+        foot_process: 'How we work',
+        foot_pricing: 'Website prices',
+        foot_faq: 'Frequently asked questions',
+        foot_about: 'About ZetaWeb',
+        foot_contact: 'Contact',
+        footer_copyright: '© 2026 ZetaWeb. All rights reserved.',
+        chat_open_label: 'Shall we talk? Open contact chat',
         chat_close_label: 'Close chat',
+        chat_bubble: 'Shall we talk?',
         chat_welcome: 'Hello! Who would you like to contact?',
-        chat_contact_selected: "Great, you've chosen to contact",
+        chat_contact_selected: 'Great, you\'ve chosen to contact',
         chat_contact_methods: 'How would you like to get in touch?',
         chat_redirecting: 'Great, opening',
         chat_open: 'Open',
@@ -223,9 +420,13 @@ const translations = {
 };
 
 /* ---------- Contactos ---------- */
+const WHATSAPP_URL =
+    'https://wa.me/34615906268?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web';
+
 const contacts = {
     ruben: {
         name: 'Rubén Palacio',
+        whatsapp: WHATSAPP_URL,
         phone: '+34615906268',
         email: 'rubenpalsis11@gmail.com',
         linkedin: 'https://www.linkedin.com/in/ruben-palacio-sisamon-4bb30425a/',
@@ -267,9 +468,12 @@ function toggleTheme() {
 
 /* ---------- Idioma ---------- */
 function resolveInitialLanguage() {
+    // Sólo cambiamos de idioma si el visitante lo ha pedido con el botón. Antes
+    // se miraba navigator.language, y eso hacía que Googlebot —que rastrea en
+    // en-US— indexara el título, el H1 y el lang de la página en inglés,
+    // justo cuando lo que nos interesa es posicionar en español.
     const stored = localStorage.getItem(STORAGE_LANG);
-    if (stored === 'es' || stored === 'en') return stored;
-    return navigator.language?.toLowerCase().startsWith('en') ? 'en' : 'es';
+    return stored === 'en' ? 'en' : 'es';
 }
 
 function applyLanguage(lang) {
@@ -524,6 +728,7 @@ function showToast(message, type = 'info') {
 
 /* ---------- Chat de contacto ---------- */
 const CHAT_ICONS = {
+    whatsapp: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884',
     phone: 'M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z',
     email: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z',
     linkedin: 'M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z',
@@ -533,6 +738,7 @@ const CHAT_ICONS = {
 
 // Cada método se muestra sólo si el contacto tiene ese dato.
 const CHAT_METHODS = [
+    { key: 'whatsapp', label: () => 'WhatsApp', text: () => 'WhatsApp', url: (c) => c.whatsapp },
     { key: 'phone', label: () => t('chat_call'), text: () => t('chat_phone_call'), url: (c) => `tel:${c.phone}` },
     { key: 'email', label: () => t('chat_email'), text: () => t('chat_email_method'), url: (c) => `mailto:${c.email}` },
     { key: 'linkedin', label: () => 'LinkedIn', text: () => 'LinkedIn', url: (c) => c.linkedin },

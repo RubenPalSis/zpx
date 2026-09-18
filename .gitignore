@@ -1,0 +1,46 @@
+# Sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Dependencias y builds de herramientas auxiliares (la web se publica tal cual,
+# sin proceso de compilación: todo lo que hay en el repo es lo que se sirve).
+node_modules/
+package-lock.json
+yarn.lock
+dist/
+build/
+.cache/
+
+# Entorno y secretos: nada de esto debe acabar en un sitio público
+.env
+.env.*
+*.pem
+*.key
+
+# Registros y temporales
+*.log
+npm-debug.log*
+logs/
+tmp/
+*.tmp
+*.bak
+*.orig
+
+# Originales de imágenes sin optimizar (las que se publican son los .webp)
+*.psd
+*.ai
+*.sketch
+assets/img/originales/

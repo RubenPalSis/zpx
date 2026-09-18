@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada | ZetaWeb</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/zpx/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/zpx/assets/css/styles.css">
+    <script>
+        (function () {
+            var d = document.documentElement;
+            try {
+                var stored = localStorage.getItem('zetaweb-theme');
+                d.dataset.theme = (stored === 'light' || stored === 'dark')
+                    ? stored
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            } catch (e) { /* localStorage bloqueado: nos quedamos en claro */ }
+        })();
+    </script>
+</head>
+
+<body>
+    <main class="hero" id="main">
+        <div class="hero-backdrop" aria-hidden="true"></div>
+        <div class="container hero-content">
+            <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span><span>Error 404</span></p>
+            <h1 class="hero-title">Esta página no existe</h1>
+            <p class="hero-subtitle">El enlace que has seguido ya no está disponible. Desde la portada puedes ver
+                nuestros servicios, los proyectos publicados y las formas de contacto.</p>
+            <div class="hero-actions">
+                <a href="/zpx/" class="button button-primary">Volver al inicio</a>
+                <a href="/zpx/#contact" class="button button-ghost">Contactar</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

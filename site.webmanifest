@@ -1,0 +1,15 @@
+{
+    "name": "ZetaWeb — Diseño de páginas web en Zaragoza",
+    "short_name": "ZetaWeb",
+    "description": "Diseño y creación de páginas web para autónomos, pequeños negocios y empresas de Zaragoza.",
+    "lang": "es-ES",
+    "start_url": "/zpx/",
+    "scope": "/zpx/",
+    "display": "minimal-ui",
+    "background_color": "#0b1120",
+    "theme_color": "#0b1120",
+    "icons": [
+        { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+        { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+    ]
+}

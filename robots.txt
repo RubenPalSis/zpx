@@ -1,0 +1,8 @@
+# ZetaWeb — https://rubenpalsis.github.io/zpx/
+# Ojo: al ser un sitio de proyecto de GitHub Pages, Google lee el robots.txt
+# del dominio (https://rubenpalsis.github.io/robots.txt), no éste. Se mantiene
+# aquí por si algún día la web pasa a un dominio propio.
+User-agent: *
+Allow: /
+
+Sitemap: https://rubenpalsis.github.io/zpx/sitemap.xml

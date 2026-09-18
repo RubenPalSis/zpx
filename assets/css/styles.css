@@ -493,9 +493,16 @@ body.intro-lock {
 .mobile-menu-footer {
     margin-top: auto;
     display: flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
     padding: 1rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
     border-top: 1px solid var(--border);
+}
+
+.mobile-menu-toggles {
+    display: flex;
+    gap: 0.5rem;
 }
 
 .ghost-button {
@@ -696,6 +703,29 @@ body.intro-lock {
     width: 100%;
 }
 
+/* Verde de marca de WhatsApp: se mantiene igual en claro y oscuro, porque es
+   lo que hace que el botón se reconozca de un vistazo. */
+.button-whatsapp {
+    background-color: #25d366;
+    color: #05270f;
+    box-shadow: 0 4px 16px -4px rgba(37, 211, 102, 0.5);
+}
+
+.button-whatsapp:hover {
+    background-color: #1fbe5a;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px -8px rgba(37, 211, 102, 0.6);
+}
+
+.button-lg {
+    padding: 0.9375rem 1.75rem;
+    font-size: 1rem;
+}
+
+.whatsapp-icon {
+    flex-shrink: 0;
+}
+
 .button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -741,6 +771,10 @@ body.intro-lock {
 
 @media (min-width: 960px) {
     .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 720px) {
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Servicios */
@@ -830,6 +864,10 @@ body.intro-lock {
     color: var(--accent-500);
 }
 
+.project-card .card-text {
+    margin-bottom: 0.875rem;
+}
+
 .project-client {
     margin-top: -0.25rem;
     margin-bottom: 0.625rem;
@@ -853,6 +891,104 @@ body.intro-lock {
     background: linear-gradient(135deg, var(--primary), var(--accent-500));
     border-color: transparent;
     padding: 0;
+}
+
+/* Para quién trabajamos */
+.audience-card {
+    border-left: 3px solid var(--primary);
+}
+
+/* Cómo trabajamos */
+.step-list {
+    list-style: none;
+    display: grid;
+    gap: 1.25rem;
+    max-width: 52rem;
+    margin-inline: auto;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.step-number {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--primary-soft);
+    color: var(--primary);
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+.step .card-title {
+    margin-bottom: 0.25rem;
+}
+
+/* Preguntas frecuentes: <details> nativo, sin una línea de JavaScript. */
+.faq-list {
+    max-width: 52rem;
+    margin-inline: auto;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.faq-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--surface);
+    overflow: hidden;
+}
+
+.faq-item[open] {
+    border-color: var(--primary);
+}
+
+.faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '';
+    flex-shrink: 0;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-right: 2px solid var(--fg-muted);
+    border-bottom: 2px solid var(--fg-muted);
+    transform: rotate(45deg) translateY(-0.125rem);
+    transition: transform 0.25s var(--ease);
+}
+
+.faq-item[open] summary::after {
+    transform: rotate(-135deg) translateY(-0.125rem);
+}
+
+.faq-item summary:hover {
+    color: var(--primary);
+}
+
+.faq-item p {
+    padding: 0 1.25rem 1.125rem;
+    color: var(--fg-muted);
+    font-size: 0.9375rem;
 }
 
 /* ---------- Tarifas ---------- */
@@ -898,12 +1034,19 @@ body.intro-lock {
     margin-top: auto;
 }
 
-.price-note {
+.price-note,
+.section-note {
     max-width: 44rem;
     margin: 2.5rem auto 0;
     text-align: center;
     font-size: 0.9375rem;
     color: var(--fg-muted);
+}
+
+.price-note a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 /* Sobre nosotros */
@@ -1114,6 +1257,19 @@ body.intro-lock {
     text-underline-offset: 3px;
 }
 
+.contact-cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.contact-area {
+    font-size: 0.875rem;
+    color: var(--fg-muted);
+}
+
 /* Footer */
 .footer {
     background-color: var(--bg-muted);
@@ -1202,13 +1358,16 @@ body.intro-lock {
     position: fixed;
     bottom: 1.25rem;
     right: 1.25rem;
-    width: 3.5rem;
-    height: 3.5rem;
-    display: grid;
-    place-items: center;
+    min-height: 3.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1.125rem;
+    color: #05270f;
+    font-weight: 700;
     background-color: #25d366;
     border: none;
-    border-radius: 50%;
+    border-radius: var(--radius-full);
     box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
     cursor: pointer;
     z-index: 90;
@@ -1223,7 +1382,29 @@ body.intro-lock {
 .whatsapp-button svg {
     width: 1.75rem;
     height: 1.75rem;
-    fill: #fff;
+    flex-shrink: 0;
+    fill: #05270f;
+}
+
+body.no-scroll .whatsapp-button {
+    display: none;
+}
+
+.whatsapp-button-label {
+    font-size: 0.9375rem;
+    white-space: nowrap;
+}
+
+/* En pantallas muy estrechas el botón vuelve a ser sólo el icono, para no
+   taparle al visitante media pantalla. */
+@media (max-width: 400px) {
+    .whatsapp-button {
+        width: 3.5rem;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .whatsapp-button-label { display: none; }
 }
 
 .chat-modal {
