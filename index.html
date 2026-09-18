@@ -1,362 +1,617 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZPX Studio - Innovación Digital</title>
+
+    <title>ZetaWeb — Estudio de Innovación Digital</title>
+    <meta name="description"
+        content="Estudio de innovación digital. Desarrollo web y apps móviles, soluciones QR y diseño UI/UX para pequeñas y medianas empresas.">
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <!-- TODO SEO: cuando sepas el dominio definitivo, añade aquí
+         <link rel="canonical" href="https://TU-DOMINIO/">, <meta property="og:url">
+         y una imagen de 1200x630 px en <meta property="og:image">; entonces
+         puedes subir twitter:card a "summary_large_image". -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ZetaWeb">
+    <meta property="og:title" content="ZetaWeb — Estudio de Innovación Digital">
+    <meta property="og:description"
+        content="Desarrollo web y apps móviles, soluciones QR y diseño UI/UX para pequeñas y medianas empresas.">
+    <meta property="og:locale" content="es_ES">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script>
+        // Se ejecuta antes de pintar: evita el parpadeo blanco en modo oscuro
+        // y marca que hay JS, para que las animaciones de scroll no oculten
+        // el contenido si el script principal falla.
+        (function () {
+            var d = document.documentElement;
+            d.classList.add('js');
+            try {
+                var stored = localStorage.getItem('zetaweb-theme');
+                d.dataset.theme = (stored === 'light' || stored === 'dark')
+                    ? stored
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            } catch (e) { /* localStorage bloqueado: nos quedamos en claro */ }
+        })();
+    </script>
 </head>
+
 <body>
+    <!-- Cortinilla de entrada: sólo la primera visita de la sesión, se salta con
+         cualquier tecla, clic o scroll, y no aparece con prefers-reduced-motion.
+         Para desactivarla del todo: borra este bloque o pon INTRO = false en logo.js. -->
+    <div class="intro" id="intro" hidden aria-hidden="true">
+        <div class="intro-inner">
+            <span class="logo-mark intro-mark" data-logo></span>
+            <span class="intro-word">Zeta<span>Web</span></span>
+        </div>
+    </div>
+
+    <a href="#main" class="skip-link" data-i18n="skip_link">Saltar al contenido</a>
+
     <!-- Header -->
     <header id="header" class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="#home" class="logo-link">
-                    <div class="logo">ZPX</div>
-                </a>
-                <nav class="desktop-nav">
-                    <a href="#services" class="nav-link">Servicios</a>
-                    <a href="#about" class="nav-link">Nosotros</a>
-                    <a href="#contact" class="nav-link">Contacto</a>
-                </nav>
-                <div class="header-actions">
-                    <button id="language-toggle" class="language-toggle">ES/EN</button>
-                </div>
-                <button id="mobile-menu-button" class="mobile-menu-button">
-                    <svg class="menu-icon" viewBox="0 0 24 24" width="24" height="24">
-                        <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        <div class="container header-content">
+            <a href="#home" class="logo-link" data-i18n-aria-label="logo_home" aria-label="ZetaWeb — ir al inicio">
+                <span class="logo-mark" data-logo>
+                        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                            <path d="M14 8 H86 V26 L48 74 H86 V92 H14 V74 L52 26 H14 Z" />
+                        </svg>
+                    </span>
+                <span class="logo-word">Zeta<span>Web</span></span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Principal">
+                <a href="#services" class="nav-link" data-i18n="nav_services">Servicios</a>
+                <a href="#projects" class="nav-link" data-i18n="nav_projects">Proyectos</a>
+                <a href="#pricing" class="nav-link" data-i18n="nav_pricing">Tarifas</a>
+                <a href="#about" class="nav-link" data-i18n="nav_about">Nosotros</a>
+                <a href="#contact" class="nav-link" data-i18n="nav_contact">Contacto</a>
+            </nav>
+
+            <div class="header-actions">
+                <button type="button" id="theme-toggle" class="icon-button" data-i18n-aria-label="theme_toggle"
+                    aria-label="Cambiar tema">
+                    <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                        <path fill="currentColor"
+                            d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-18a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM1 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1zm19 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1zM4.22 4.22a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 0 1-1.42 1.41L4.22 5.64a1 1 0 0 1 0-1.42zm12.73 12.73a1 1 0 0 1 1.41 0l1.42 1.41a1 1 0 0 1-1.42 1.42l-1.41-1.42a1 1 0 0 1 0-1.41zM19.78 4.22a1 1 0 0 1 0 1.42l-1.42 1.41a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 0 1 1.42 0zM7.05 16.95a1 1 0 0 1 0 1.41l-1.42 1.42a1 1 0 0 1-1.41-1.42l1.41-1.41a1 1 0 0 1 1.42 0z" />
+                    </svg>
+                    <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                        <path fill="currentColor"
+                            d="M12.1 22c-5.52 0-10-4.48-10-10 0-4.62 3.13-8.5 7.38-9.65a1 1 0 0 1 1.2 1.34A7.5 7.5 0 0 0 20.3 13.3a1 1 0 0 1 1.34 1.2A10.02 10.02 0 0 1 12.1 22z" />
                     </svg>
                 </button>
+                <button type="button" id="language-toggle" class="language-toggle" aria-label="Español / English">
+                    <span id="language-label">ES</span>
+                </button>
             </div>
+
+            <button type="button" id="mobile-menu-button" class="icon-button mobile-menu-button"
+                aria-controls="mobile-menu" aria-expanded="false" data-i18n-aria-label="menu_open"
+                aria-label="Abrir menú">
+                <svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                    <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+                </svg>
+            </button>
         </div>
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
         <div class="mobile-menu-header">
-            <a href="#home" class="logo-link">
-                <div class="logo">ZPX</div>
-            </a>
-            <button id="close-menu-button" class="close-menu-button">
-                <svg class="close-icon" viewBox="0 0 24 24" width="24" height="24">
-                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            <span class="logo-link">
+                <span class="logo-mark" data-logo>
+                        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                            <path d="M14 8 H86 V26 L48 74 H86 V92 H14 V74 L52 26 H14 Z" />
+                        </svg>
+                    </span>
+                <span class="logo-word">Zeta<span>Web</span></span>
+            </span>
+            <button type="button" id="close-menu-button" class="icon-button" data-i18n-aria-label="menu_close"
+                aria-label="Cerrar menú">
+                <svg class="icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
                 </svg>
             </button>
         </div>
-        <nav class="mobile-nav">
-            <a href="#services" class="mobile-nav-link">Servicios</a>
-            <a href="#about" class="mobile-nav-link">Nosotros</a>
-            <a href="#qr-tool" class="mobile-nav-link">Herramienta QR</a>
-            <a href="#contact" class="mobile-nav-link">Contacto</a>
+        <nav class="mobile-nav" aria-label="Principal móvil">
+            <a href="#services" class="mobile-nav-link" data-i18n="nav_services">Servicios</a>
+            <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects">Proyectos</a>
+            <a href="#pricing" class="mobile-nav-link" data-i18n="nav_pricing">Tarifas</a>
+            <a href="#about" class="mobile-nav-link" data-i18n="nav_about">Nosotros</a>
+            <a href="#contact" class="mobile-nav-link" data-i18n="nav_contact">Contacto</a>
         </nav>
         <div class="mobile-menu-footer">
-            <button id="mobile-language-toggle" class="language-toggle">ES/EN</button>
+            <button type="button" id="mobile-theme-toggle" class="ghost-button" data-i18n="theme_toggle">Cambiar
+                tema</button>
+            <button type="button" id="mobile-language-toggle" class="ghost-button">
+                <span id="mobile-language-label">ES</span>
+            </button>
         </div>
     </div>
+    <div class="scrim" id="menu-scrim" hidden></div>
 
-    <!-- Estudio de Innovación Digital Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Estudio de Innovación Digital</h1>
-                <p class="hero-subtitle">Creamos soluciones digitales personalizadas, desde aplicaciones web y móviles hasta códigos QR interactivos y diseños visuales impresionantes.</p>
-                <a href="#contact" class="cta-button">
-                    Inicia Tu Proyecto
-                    <svg class="arrow-icon" viewBox="0 0 24 24" width="20" height="20">
-                        <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                    </svg>
-                </a>
+    <main id="main">
+        <!-- Hero -->
+        <section id="home" class="hero">
+            <div class="hero-backdrop" aria-hidden="true"></div>
+            <div class="container hero-content">
+                <p class="eyebrow">
+                    <span class="eyebrow-dot" aria-hidden="true"></span>
+                    <span data-i18n="hero_eyebrow">Disponibles para nuevos proyectos</span>
+                </p>
+                <h1 class="hero-title" data-i18n="hero_title">Estudio de Innovación Digital</h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Creamos soluciones digitales personalizadas, desde
+                    aplicaciones web y móviles hasta códigos QR interactivos y diseños visuales impresionantes.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="button button-primary">
+                        <span data-i18n="hero_cta">Inicia Tu Proyecto</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                        </svg>
+                    </a>
+                    <a href="#projects" class="button button-ghost" data-i18n="hero_cta_secondary">Ver nuestro trabajo</a>
+                </div>
+                <dl class="hero-stats">
+                    <div class="stat">
+                        <dt data-i18n="stat_1_label">Clientes atendidos</dt>
+                        <dd>6</dd>
+                    </div>
+                    <div class="stat">
+                        <dt data-i18n="stat_2_label">Plataformas</dt>
+                        <dd data-i18n="stat_2_value">Web · iOS · Android</dd>
+                    </div>
+                    <div class="stat">
+                        <dt data-i18n="stat_3_label">Respuesta media</dt>
+                        <dd data-i18n="stat_3_value">Menos de 24 h</dd>
+                    </div>
+                </dl>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Nuestros Servicios Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <p class="section-subtitle">Ofrecemos una amplia gama de servicios digitales para dar vida a tus ideas.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40">
-                            <path fill="currentColor" d="M14.6 16.6l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Desarrollo Web</h3>
-                    <p class="service-description">Sitios web y aplicaciones web personalizadas construidas con tecnologías modernas.</p>
+        <!-- Servicios -->
+        <section id="services" class="section section-muted">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title" data-i18n="services_title">Nuestros Servicios</h2>
+                    <p class="section-subtitle" data-i18n="services_subtitle">Ofrecemos una amplia gama de servicios
+                        digitales para dar vida a tus ideas.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <img src="assets/img/QR.png" alt="Icono de Soluciones QR" width="40" height="40">
-                    </div>
-                    <h3 class="service-title">Soluciones QR</h3>
-                    <p class="service-description">Códigos QR personalizados con seguimiento, análisis y contenido dinámico.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40">
-                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Diseño UI/UX</h3>
-                    <p class="service-description">Interfaces modernas e intuitivas diseñadas pensando en el usuario.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="card-grid card-grid-3">
+                    <article class="card service-card reveal">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="28" height="28">
+                                <path fill="currentColor"
+                                    d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                            </svg>
+                        </div>
+                        <h3 class="card-title" data-i18n="service_1_title">Desarrollo Web</h3>
+                        <p class="card-text" data-i18n="service_1_desc">Sitios web y aplicaciones web personalizadas
+                            construidas con tecnologías modernas.</p>
+                    </article>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Nuestros Proyectos</h2>
-                <p class="section-subtitle">Descubre algunos de nuestros trabajos más recientes</p>
-            </div>
+                    <article class="card service-card reveal">
+                        <div class="service-icon" aria-hidden="true">
+                            <img src="assets/img/QR.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="card-title" data-i18n="service_2_title">Soluciones QR</h3>
+                        <p class="card-text" data-i18n="service_2_desc">Códigos QR personalizados con seguimiento,
+                            análisis y contenido dinámico.</p>
+                    </article>
 
-            <div class="projects-grid">
-                <!-- PROYECTO 1-->
-                <div class="project-card">
-                    <div class="project-logo">
-                        <img src="assets/img/barberia-logo.jpg" alt="Logo BarberShop">
-                    </div>
-                    <h3 class="project-title">BarberShop</h3>
-                    <p class="project-description"><span class="tech-tag">PÁGINA WEB</span></p>
-                    <a href="https://rubenpalsis.github.io/BarberShop/" target="_blank" class="project-button">
-                        Ver Proyecto
-                        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </a>
-                </div>
-                <!-- PROYECTO 2-->
-                <div class="project-card">
-                    <div class="project-logo">
-                        <img src="assets/img/PlayStore.webp" alt="Logo PlayStore">
-                    </div>
-                    <h3 class="project-title">BasketStats</h3>
-                    <p class="project-description"><span class="tech-tag">APP ANDROID</span></p>
-                    <a href="https://play.google.com/store/apps/details?id=com.appStatsBaloncestoRuben.basketapp" target="_blank" class="project-button">
-                        Ver App
-                        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </a>
-                </div>
-                <!-- PROYECTO 3-->
-                <div class="project-card">
-                    <div class="project-logo">
-                        <img src="assets/img/termaebro.png" alt="Logo TermaEbro">
-                    </div>
-                    <h3 class="project-title">TermaEbro</h3>
-                    <p class="project-description"><span class="tech-tag">PÁGINA WEB</span></p>
-                    <a href="https://www.termaebro.com/" target="_blank" class="project-button">
-                        Ver Proyecto
-                        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </a>
-                </div>
-                <!-- PROYECTO 4-->
-                <div class="project-card">
-                    <div class="project-logo">
-                        <img src="assets/img/tapicerias.png" alt="Logo Deluxe">
-                    </div>
-                    <h3 class="project-title">Tapicerias Deluxe</h3>
-                    <p class="project-description"><span class="tech-tag">PÁGINA WEB</span></p>
-                    <a href="https://tapiceriasdeluxe.com/" target="_blank" class="project-button">
-                        Ver Proyecto
-                        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </a>
-                </div>
-            <!-- PROYECTO 5-->
-                <div class="project-card">
-                    <div class="project-logo">
-                        <img src="assets/img/dom.png" alt="Logo Dominicos">
-                    </div>
-                    <h3 class="project-title">CB Dominicos</h3>
-                    <p class="project-description"><span class="tech-tag">PÁGINA WEB</span><span class="tech-tag">En curso</span></p>
-                    <a href="https://baloncestodominicos.es/" target="_blank" class="project-button">
-                        Ver Proyecto
-                        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </a>
-                </div>
-            <!-- PROYECTO 6-->
-                <div class="project-card">
-                    <div class="project-logo">
-                        <img src="assets/img/dom.png" alt="Logo Dominicos">
-                    </div>
-                    <h3 class="project-title">GestionaTeam</h3>
-                    <p class="project-description"><span class="tech-tag">APP IOS/ANDROID</span></p>
-                    <a href="https://gestionateam.web.app/" target="_blank" class="project-button">
-                        Ver Proyecto
-                        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                        </svg>
-                    </a>
+                    <article class="card service-card reveal">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="28" height="28">
+                                <path fill="currentColor"
+                                    d="M12 3a9 9 0 1 0 0 18 1.5 1.5 0 0 0 1.5-1.5c0-.39-.15-.74-.39-1a1.5 1.5 0 0 1 1.06-2.56H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8zm-5.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                            </svg>
+                        </div>
+                        <h3 class="card-title" data-i18n="service_3_title">Diseño UI/UX</h3>
+                        <p class="card-text" data-i18n="service_3_desc">Interfaces modernas e intuitivas diseñadas
+                            pensando en el usuario.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Sobre Nosotros Section 
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Sobre Nosotros</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-<p>Somos dos amigos apasionados por la informática, Rubén Palacio y Ines Capdevila. Aunque somos jóvenes en el sector, nos entusiasma crear soluciones digitales a medida para pequeñas y medianas empresas, adaptándonos a lo que realmente necesitan. Nos dedicamos a combinar creatividad, tecnología y compromiso para ayudar a que cada proyecto destaque y cumpla con sus objetivos en el mundo digital. Cada cliente es para nosotros una oportunidad de aprender, crecer y aportar valor real a su negocio.</p>                </div>
-                <div class="founders-grid">
-                    <div class="founder-card">
-                        <div class="founder-image">
-                            <img src="assets/img/ruben_perfil.png" alt="Foto de Rubén Palacio">
-                        </div>
-                        <div class="founder-info">
-                            <h4 class="founder-name">Rubén Palacio</h4>
-                            <p class="founder-role">Desarrollador Full Stack</p>
-                        </div>
-                    </div>
-                    <div class="founder-card">
-                        <div class="founder-image">
-                            <img src="assets/img/Ines_perfil.png" alt="Foto de Ines Capdevila">
-                        </div>
-                        <div class="founder-info">
-                            <h4 class="founder-name">Ines Capdevila</h4>
-                            <p class="founder-role">Diseñador UI/UX</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Ponte en Contacto</h2>
-                <p class="section-subtitle">¿Listo para comenzar tu proyecto? Contáctanos hoy.</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-form-container">
-                    <div class="contact-form-header">
-                        <h3>Envíanos un mensaje</h3>
-                    </div>
-                    <form id="contact-form" action="https://formspree.io/f/xyezgrro" method="POST">
-                        <div class="form-group">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" id="name" name="name" class="form-input" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label">Correo Electrónico</label>
-                            <input type="email" id="email" name="email" class="form-input" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject" class="form-label">Asunto</label>
-                            <input type="text" id="subject" name="subject" class="form-input" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" class="form-label">Mensaje</label>
-                            <textarea id="message" name="message" class="form-textarea" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">Enviar Mensaje</button>
-                    </form>
+        <!-- Proyectos -->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title" data-i18n="projects_title">Nuestros Proyectos</h2>
+                    <p class="section-subtitle" data-i18n="projects_subtitle">Descubre algunos de nuestros trabajos más
+                        recientes</p>
                 </div>
-                <div class="contact-info">
-                    <h3>Información de Contacto</h3>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" width="24" height="24">
-                                    <path fill="currentColor" d="M12 12c2.7 0 4.88-2.18 4.88-4.88S14.7 2.24 12 2.24 7.12 4.42 7.12 7.12 9.3 12 12 12zm0 2.24c-3.33 0-9.99 1.68-9.99 5.01V22h19.98v-2.75c0-3.33-6.66-5.01-9.99-5.01z"/>
+
+                <div class="card-grid card-grid-3">
+                    <article class="card project-card reveal">
+                        <div class="project-logo">
+                            <img src="assets/img/barberia-logo.jpg" alt="Logo de BarberShop" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="card-title">BarberShop</h3>
+                        <p class="tag-row">
+                            <span class="tag" data-i18n="tag_website">Página web</span>
+                        </p>
+                        <div class="project-links">
+                            <a href="https://rubenpalsis.github.io/BarberShop/" target="_blank" rel="noopener" class="button button-primary button-sm">
+                                <span data-i18n="btn_visit_site">Ver web</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
                                 </svg>
-                            </div>
-                            <div class="contact-text">
-                                <h4>Rubén Palacio</h4>
-                                <a href="tel:+34615906268">
-                                    (  
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg" alt="España" style="width:20px; height:14px; vertical-align:middle;">
-                                     +34) 615 906 268
-                                </a><br>
-                                <a href="mailto:rubenpalsis11@gmail.com">rubenpalsis11@gmail.com</a><br>
-                                <a href="https://www.linkedin.com/in/ruben-palacio-sisamon-4bb30425a/">LinkedIn</a><br>
-                                <a href="https://github.com/RubenPalSis">GitHub</a><br>
-                                <a href="https://rubenpalsis.github.io/portfolio/">Portfolio Online</a><br>
-                            </div>
+                            </a>
                         </div>
-                        <br><br>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" width="24" height="24">
-                                    <path fill="currentColor" d="M12 12c2.7 0 4.88-2.18 4.88-4.88S14.7 2.24 12 2.24 7.12 4.42 7.12 7.12 9.3 12 12 12zm0 2.24c-3.33 0-9.99 1.68-9.99 5.01V22h19.98v-2.75c0-3.33-6.66-5.01-9.99-5.01z"/>
+                    </article>
+                    <article class="card project-card reveal">
+                        <div class="project-logo">
+                            <img src="assets/img/tapicerias.png" alt="Logo de Tapicerías Deluxe" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="card-title">Tapicerías Deluxe</h3>
+                        <p class="tag-row">
+                            <span class="tag" data-i18n="tag_website">Página web</span>
+                            <span class="tag tag-soft" data-i18n="tag_maintenance">Mantenimiento</span>
+                        </p>
+                        <div class="project-links">
+                            <a href="https://tapiceriasdeluxe.com/" target="_blank" rel="noopener" class="button button-primary button-sm">
+                                <span data-i18n="btn_visit_site">Ver web</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
                                 </svg>
+                            </a>
+                            <a href="https://www.instagram.com/deluxetapicerias/" target="_blank" rel="noopener" class="button button-ghost button-sm" data-i18n="btn_instagram">Instagram</a>
+                        </div>
+                    </article>
+                    <article class="card project-card reveal">
+                        <div class="project-logo">
+                            <img src="assets/img/termaebro.png" alt="Logo de TermaEbro" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="card-title">TermaEbro</h3>
+                        <p class="tag-row">
+                            <span class="tag" data-i18n="tag_website">Página web</span>
+                            <span class="tag tag-soft" data-i18n="tag_maintenance">Mantenimiento</span>
+                        </p>
+                        <div class="project-links">
+                            <a href="https://termaebro.com/" target="_blank" rel="noopener" class="button button-primary button-sm">
+                                <span data-i18n="btn_visit_site">Ver web</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="card project-card reveal">
+                        <!-- TODO: sustituir por el logo real de Andrés Aldea Quiromasaje en assets/img/ -->
+                        <div class="project-logo project-logo-initials" aria-hidden="true">AA</div>
+                        <h3 class="card-title">Andrés Aldea Quiromasaje</h3>
+                        <p class="tag-row">
+                            <span class="tag" data-i18n="tag_website">Página web</span>
+                            <span class="tag tag-accent" data-i18n="tag_redesign">Rediseño en curso</span>
+                        </p>
+                        <div class="project-links">
+                            <a href="https://quiromasajezaragoza.es/" target="_blank" rel="noopener" class="button button-primary button-sm">
+                                <span data-i18n="btn_visit_site">Ver web</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                                </svg>
+                            </a>
+                            <a href="https://rubenpalsis.github.io/quiromasaje/Quiromasaje/index.html?refresh" target="_blank" rel="noopener" class="button button-ghost button-sm" data-i18n="btn_new_version">Versión nueva</a>
+                        </div>
+                    </article>
+                    <article class="card project-card reveal">
+                        <div class="project-logo">
+                            <img src="assets/img/dom.png" alt="Logo de CB Dominicos" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="card-title">CB Dominicos</h3>
+                        <p class="tag-row">
+                            <span class="tag" data-i18n="tag_website">Página web</span>
+                            <span class="tag tag-accent" data-i18n="tag_redesign">Rediseño en curso</span>
+                        </p>
+                        <div class="project-links">
+                            <a href="https://baloncestodominicos.es/" target="_blank" rel="noopener" class="button button-primary button-sm">
+                                <span data-i18n="btn_visit_site">Ver web</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                                </svg>
+                            </a>
+                            <a href="https://rubenpalsis.github.io/dominicos/dominicosweb/index.html" target="_blank" rel="noopener" class="button button-ghost button-sm" data-i18n="btn_new_version">Versión nueva</a>
+                        </div>
+                    </article>
+                    <article class="card project-card reveal">
+                        <!-- TODO: sustituir por el logo real de GestionaTeam en assets/img/ -->
+                        <div class="project-logo project-logo-initials" aria-hidden="true">GT</div>
+                        <h3 class="card-title">GestionaTeam</h3>
+                        <p class="project-client">CB Dominicos</p>
+                        <p class="tag-row">
+                            <span class="tag" data-i18n="tag_pwa">PWA iOS / Android</span>
+                        </p>
+                        <div class="project-links">
+                            <a href="https://gestionateam.web.app/" target="_blank" rel="noopener" class="button button-primary button-sm">
+                                <span data-i18n="btn_open_app">Abrir app</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="card project-card reveal">
+                        <div class="project-logo">
+                            <img src="assets/img/PlayStore.webp" alt="Logo de BasketStats" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="card-title">BasketStats</h3>
+                        <p class="project-client">Casademont Zaragoza</p>
+                        <p class="tag-row">
+                            <span class="tag" data-i18n="tag_android">App Android</span>
+                        </p>
+                        <div class="project-links">
+                            <a href="https://play.google.com/store/apps/details?id=com.appStatsBaloncestoRuben.basketapp" target="_blank" rel="noopener" class="button button-primary button-sm">
+                                <span data-i18n="btn_view_app">Ver en Play Store</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tarifas -->
+        <section id="pricing" class="section section-muted">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title" data-i18n="pricing_title">Tarifas</h2>
+                    <p class="section-subtitle" data-i18n="pricing_subtitle">Precios de partida orientativos. El
+                        presupuesto final depende del alcance de cada proyecto.</p>
+                </div>
+
+                <div class="card-grid card-grid-3">
+                    <article class="card price-card reveal">
+                        <h3 class="card-title" data-i18n="price_web_title">Página web</h3>
+                        <p class="price-amount">
+                            <span class="price-from" data-i18n="price_from">desde</span>
+                            <strong>80 €</strong>
+                        </p>
+                        <p class="card-text" data-i18n="price_web_desc">Diseño y desarrollo a medida, adaptado a móvil
+                            y preparado para buscadores.</p>
+                        <a href="#contact" class="button button-ghost button-sm" data-i18n="price_cta">Pedir
+                            presupuesto</a>
+                    </article>
+
+                    <article class="card price-card reveal">
+                        <h3 class="card-title" data-i18n="price_app_title">App a medida</h3>
+                        <p class="price-amount">
+                            <span class="price-from" data-i18n="price_from">desde</span>
+                            <strong>150 €</strong>
+                        </p>
+                        <p class="card-text" data-i18n="price_app_desc">Aplicación para iOS y Android, con la licencia
+                            de publicación en Play Store incluida.</p>
+                        <a href="#contact" class="button button-ghost button-sm" data-i18n="price_cta">Pedir
+                            presupuesto</a>
+                    </article>
+
+                    <article class="card price-card reveal">
+                        <h3 class="card-title" data-i18n="price_maintenance_title">Mantenimiento web</h3>
+                        <p class="price-amount">
+                            <strong>50 €</strong>
+                            <span class="price-period" data-i18n="price_per_month">/mes</span>
+                        </p>
+                        <p class="card-text" data-i18n="price_maintenance_desc">Actualizaciones de contenido, copias de
+                            seguridad y soporte continuo.</p>
+                        <a href="#contact" class="button button-ghost button-sm" data-i18n="price_cta">Pedir
+                            presupuesto</a>
+                    </article>
+                </div>
+
+                <p class="price-note reveal" data-i18n="price_note">¿Tu proyecto necesita algo distinto? Cuéntanoslo y
+                    te preparamos un presupuesto cerrado sin compromiso.</p>
+            </div>
+        </section>
+
+        <!-- Sobre Nosotros -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title" data-i18n="about_title">Sobre Nosotros</h2>
+                    <p class="section-subtitle" data-i18n="about_subtitle">Conoce al equipo detrás de ZetaWeb</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text reveal">
+                        <p data-i18n="about_desc">Somos un equipo apasionado por la tecnología: Rubén Palacio e Ines
+                            Capdevila. Nos entusiasma crear soluciones digitales a medida para pequeñas y medianas
+                            empresas, adaptándonos a lo que realmente necesitan. Combinamos creatividad, tecnología y
+                            compromiso para que cada proyecto destaque y cumpla sus objetivos en el mundo digital. Cada
+                            cliente es para nosotros una oportunidad de aprender, crecer y aportar valor real a su
+                            negocio.</p>
+                    </div>
+                    <div class="founders-grid reveal">
+                        <article class="founder-card">
+                            <div class="founder-image">
+                                <img src="assets/img/ruben_perfil.png" alt="Foto de Rubén Palacio" loading="lazy"
+                                    decoding="async">
                             </div>
-                            <div class="contact-text">
-                                <h4>Ines Capdevila</h4>
-                                <a href="tel:+34656766857">
-                                    (<img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg" 
-                                    alt="España" style="width:20px; height:14px; vertical-align:middle;"> +34) 691 467 184
-                                </a>                                <br>
-                                <a href="mailto:Inesgiga18@gmail.com">inescapdevilagarcia@gmail.com</a><br>
+                            <h3 class="founder-name">Rubén Palacio</h3>
+                            <p class="founder-role" data-i18n="ruben_role">Desarrollador Full Stack</p>
+                        </article>
+                        <article class="founder-card">
+                            <!-- TODO: sustituir por <img src="assets/img/ines_perfil.png" alt="Foto de Ines Capdevila"> -->
+                            <div class="founder-image founder-image-initials" aria-hidden="true">IC</div>
+                            <h3 class="founder-name">Ines Capdevila</h3>
+                            <p class="founder-role" data-i18n="ines_role">Desarrollo de Negocio y Redes Sociales</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contact" class="section section-muted">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title" data-i18n="contact_title">Ponte en Contacto</h2>
+                    <p class="section-subtitle" data-i18n="contact_subtitle">¿Listo para comenzar tu proyecto?
+                        Contáctanos hoy.</p>
+                </div>
+
+                <div class="contact-content">
+                    <div class="card contact-form-card reveal">
+                        <h3 class="card-title" data-i18n="form_send_message">Envíanos un mensaje</h3>
+                        <form id="contact-form" action="https://formspree.io/f/xyezgrro" method="POST" novalidate>
+                            <div class="form-group">
+                                <label for="name" class="form-label" data-i18n="form_name">Nombre</label>
+                                <input type="text" id="name" name="name" class="form-input" autocomplete="name"
+                                    required>
+                                <p class="error-message" id="name-error" role="alert"></p>
                             </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label" data-i18n="form_email">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" class="form-input" autocomplete="email"
+                                    required>
+                                <p class="error-message" id="email-error" role="alert"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="form-label" data-i18n="form_subject">Asunto</label>
+                                <input type="text" id="subject" name="subject" class="form-input" required>
+                                <p class="error-message" id="subject-error" role="alert"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label" data-i18n="form_message">Mensaje</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="5" required></textarea>
+                                <p class="error-message" id="message-error" role="alert"></p>
+                            </div>
+                            <button type="submit" class="button button-primary button-block" data-i18n="form_submit">
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="contact-info reveal">
+                        <h3 class="card-title" data-i18n="contact_info">Información de Contacto</h3>
+                        <div class="contact-details">
+                            <article class="card contact-card">
+                                <div class="contact-card-head">
+                                    <div class="founder-image founder-image-sm">
+                                        <img src="assets/img/ruben_perfil.png" alt="" loading="lazy" decoding="async">
+                                    </div>
+                                    <div>
+                                        <h4 class="contact-name">Rubén Palacio</h4>
+                                        <p class="contact-role" data-i18n="ruben_role">Desarrollador Full Stack</p>
+                                    </div>
+                                </div>
+                                <ul class="contact-links">
+                                    <li><a href="tel:+34615906268">+34 615 906 268</a></li>
+                                    <li><a href="mailto:rubenpalsis11@gmail.com">rubenpalsis11@gmail.com</a></li>
+                                    <li><a href="https://www.linkedin.com/in/ruben-palacio-sisamon-4bb30425a/"
+                                            target="_blank" rel="noopener">LinkedIn</a></li>
+                                    <li><a href="https://github.com/RubenPalSis" target="_blank"
+                                            rel="noopener">GitHub</a></li>
+                                    <li><a href="https://rubenpalsis.github.io/portfolio/" target="_blank"
+                                            rel="noopener" data-i18n="contact_portfolio">Portfolio online</a></li>
+                                </ul>
+                            </article>
+
+                            <article class="card contact-card">
+                                <div class="contact-card-head">
+                                    <div class="founder-image founder-image-sm founder-image-initials" aria-hidden="true">
+                                        IC</div>
+                                    <div>
+                                        <h4 class="contact-name">Ines Capdevila</h4>
+                                        <p class="contact-role" data-i18n="ines_role">Desarrollo de Negocio y Redes
+                                            Sociales</p>
+                                    </div>
+                                </div>
+                                <ul class="contact-links">
+                                    <li><a href="tel:+34656766857">+34 656 766 857</a></li>
+                                    <li><a href="mailto:Inesgiga18@gmail.com">Inesgiga18@gmail.com</a></li>
+                                </ul>
+                            </article>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <a href="#home" class="footer-logo">
-                        <div class="logo">ZPX</div>
-                    </a>
-                    <p class="footer-description">Creamos soluciones digitales personalizadas, desde aplicaciones web hasta códigos QR interactivos y diseños visuales impresionantes.</p>
-                </div>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <a href="#home" class="logo-link" data-i18n-aria-label="logo_home" aria-label="ZetaWeb — ir al inicio">
+                    <span class="logo-mark" data-logo>
+                        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                            <path d="M14 8 H86 V26 L48 74 H86 V92 H14 V74 L52 26 H14 Z" />
+                        </svg>
+                    </span>
+                    <span class="logo-word">Zeta<span>Web</span></span>
+                </a>
+                <p class="footer-description" data-i18n="footer_description">Creamos soluciones digitales
+                    personalizadas, desde aplicaciones web hasta códigos QR interactivos y diseños visuales
+                    impresionantes.</p>
             </div>
-            <div class="footer-bottom">
-                <p>© 2025 ZPX Studio. Todos los derechos reservados.</p>
-            </div>
+            <nav class="footer-nav" aria-label="Pie de página">
+                <a href="#services" data-i18n="nav_services">Servicios</a>
+                <a href="#projects" data-i18n="nav_projects">Proyectos</a>
+                <a href="#pricing" data-i18n="nav_pricing">Tarifas</a>
+                <a href="#about" data-i18n="nav_about">Nosotros</a>
+                <a href="#contact" data-i18n="nav_contact">Contacto</a>
+            </nav>
+        </div>
+        <div class="container footer-bottom">
+            <p data-i18n="footer_copyright">© 2025 ZetaWeb. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-        <div class="toast-content">
-            <span id="toast-message"></span>
-        </div>
+    <!-- Toast -->
+    <div id="toast" class="toast" role="status" aria-live="polite">
+        <div class="toast-content"><span id="toast-message"></span></div>
     </div>
 
-        <!-- Chat -->
-<div class="whatsapp-button" id="whatsapp-button">
-    <svg viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.189-3.553-8.449"/>
-    </svg>
-</div>
-
-<div class="overlay" id="chat-overlay"></div>
-
-<div class="chat-modal" id="chat-modal">
-    <div class="chat-header">
-        <svg viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.189-3.553-8.449"/>
+    <!-- Chat de contacto -->
+    <button type="button" class="whatsapp-button" id="whatsapp-button" aria-controls="chat-modal" aria-expanded="false"
+        data-i18n-aria-label="chat_open_label" aria-label="Abrir chat de contacto">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.189-3.553-8.449" />
         </svg>
-        <h3>ZPX Studio</h3>
+    </button>
+
+    <div class="scrim" id="chat-scrim" hidden></div>
+
+    <div class="chat-modal" id="chat-modal" role="dialog" aria-modal="true" aria-label="Chat de contacto" hidden>
+        <div class="chat-header">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.189-3.553-8.449" />
+            </svg>
+            <h3>ZetaWeb</h3>
+            <button type="button" id="chat-close" class="chat-close" data-i18n-aria-label="chat_close_label"
+                aria-label="Cerrar chat">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path fill="currentColor"
+                        d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+                </svg>
+            </button>
+        </div>
+        <div class="chat-body" id="chat-body"></div>
     </div>
-    <div class="chat-body" id="chat-body">
-    </div>
-</div>
-    <script src="assets/js/script.js"></script>
+
+    <script src="assets/js/logo.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
 </body>
 
 </html>
-
