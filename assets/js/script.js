@@ -85,6 +85,8 @@ const translations = {
             'Página web para una empresa de climatización: aire acondicionado, calefacción y ventilación, con petición de presupuesto.',
         project_quiro_desc:
             'Página web para un centro de quiromasaje de Zaragoza. Estamos con el rediseño: puedes comparar la actual con la versión nueva.',
+        project_aranda_desc:
+            'Página web para una pollería y charcutería de barrio en Zaragoza, con sus productos, horarios y contacto directo por teléfono o WhatsApp.',
         project_dominicos_desc:
             'Web para un club de baloncesto de Zaragoza, con sus equipos y categorías, también en pleno rediseño.',
         project_gestionateam_desc:
@@ -293,6 +295,8 @@ const translations = {
             'Website for an air conditioning company: cooling, heating and ventilation, with a quote request form.',
         project_quiro_desc:
             'Website for a massage therapy centre in Zaragoza. The redesign is under way: you can compare the current site with the new version.',
+        project_aranda_desc:
+            'Website for a neighbourhood poultry shop and delicatessen in Zaragoza, with its products, opening hours and direct contact by phone or WhatsApp.',
         project_dominicos_desc:
             'Website for a basketball club in Zaragoza, with its teams and age groups, also being redesigned right now.',
         project_gestionateam_desc:
