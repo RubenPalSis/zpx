@@ -125,6 +125,8 @@ const translations = {
         price_cta: 'Pedir presupuesto',
         price_web_title: 'Página web',
         price_web_desc: 'Diseño y desarrollo a medida, con diseño responsive y preparada para buscadores.',
+        price_pack_title: 'Web + dominio + hosting',
+        price_pack_desc: 'Tu página web lista para publicar: te registramos el dominio y la alojamos en nuestro hosting.',
         price_app_title: 'App a medida',
         price_app_desc:
             'Aplicación para iOS y Android, con la licencia de publicación en Play Store incluida.',
@@ -136,7 +138,7 @@ const translations = {
         faq_subtitle: 'Lo que nos preguntan casi siempre antes de empezar.',
         faq_1_q: '¿Cuánto cuesta hacer una página web?',
         faq_1_a:
-            'Partimos de 80 € para una web sencilla de presentación. Antes de empezar te pasamos un presupuesto cerrado, para que sepas el precio exacto desde el principio. El importe final depende del número de páginas y de las funciones que necesites.',
+            'Partimos de 80 € para una web sencilla de presentación, o 100 € si incluye también el dominio y el hosting. Antes de empezar te pasamos un presupuesto cerrado, para que sepas el precio exacto desde el principio. El importe final depende del número de páginas y de las funciones que necesites.',
         faq_2_q: '¿Cuánto se tarda en tener la web publicada?',
         faq_2_a:
             'Depende del tamaño del proyecto y, sobre todo, de lo rápido que llegue el material: textos, fotos y logo. Una web sencilla de presentación avanza rápido. El plazo concreto te lo damos junto con el presupuesto, antes de ponernos a trabajar.',
@@ -334,6 +336,8 @@ const translations = {
         price_cta: 'Request a quote',
         price_web_title: 'Website',
         price_web_desc: 'Custom design and development, fully responsive and prepared for search engines.',
+        price_pack_title: 'Website + domain + hosting',
+        price_pack_desc: 'Your website ready to go live: we register the domain and host it for you.',
         price_app_title: 'Custom app',
         price_app_desc: 'An iOS and Android application, Play Store publishing licence included.',
         price_maintenance_title: 'Website maintenance',
@@ -344,7 +348,7 @@ const translations = {
         faq_subtitle: 'What people almost always ask us before starting.',
         faq_1_q: 'How much does a website cost?',
         faq_1_a:
-            'We start at €80 for a simple presentation site. Before any work begins we send you a fixed quote, so you know the exact price from the start. The final figure depends on how many pages and features you need.',
+            'We start at €80 for a simple presentation site, or €100 if it also includes the domain and hosting. Before any work begins we send you a fixed quote, so you know the exact price from the start. The final figure depends on how many pages and features you need.',
         faq_2_q: 'How long does it take to get the site live?',
         faq_2_a:
             'It depends on the size of the project and, above all, on how quickly the material arrives: texts, photos and logo. A simple presentation site moves fast. We give you the specific timeline together with the quote, before starting work.',
