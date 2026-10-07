@@ -1054,6 +1054,42 @@ body.intro-lock {
     text-underline-offset: 3px;
 }
 
+/* Promociones */
+.promo-card {
+    max-width: 44rem;
+    margin: 2.5rem auto 0;
+    padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.promo-form {
+    margin-top: 1.25rem;
+}
+
+.promo-row {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.promo-row .form-input {
+    flex: 1;
+    min-width: 0;
+    text-transform: uppercase;
+}
+
+.promo-result {
+    margin-top: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+.promo-result:empty { display: none; }
+.promo-result.is-success { color: var(--success); }
+.promo-result.is-error { color: var(--danger); }
+
+@media (max-width: 480px) {
+    .promo-row { flex-direction: column; }
+}
+
 /* Sobre nosotros */
 .about-content {
     display: grid;

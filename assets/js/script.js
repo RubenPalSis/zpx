@@ -87,6 +87,8 @@ const translations = {
             'Página web para un centro de quiromasaje de Zaragoza. Estamos con el rediseño: puedes comparar la actual con la versión nueva.',
         project_aranda_desc:
             'Página web para una pollería y charcutería de barrio en Zaragoza, con sus productos, horarios y contacto directo por teléfono o WhatsApp.',
+        project_gruas_desc:
+            'Página web para un servicio de grúa y asistencia en carretera 24 horas, con dominio propio, posicionamiento SEO y llamada directa en un toque.',
         project_dominicos_desc:
             'Web para un club de baloncesto de Zaragoza, con sus equipos y categorías, también en pleno rediseño.',
         project_gestionateam_desc:
@@ -102,6 +104,7 @@ const translations = {
         tag_android: 'App Android',
         tag_pwa: 'PWA iOS / Android',
         tag_maintenance: 'Mantenimiento',
+        tag_seo: 'SEO',
         tag_redesign: 'Rediseño en curso',
         process_title: 'Cómo trabajamos',
         process_subtitle: 'Cuatro pasos, sin letra pequeña y sin sorpresas en la factura.',
@@ -132,6 +135,14 @@ const translations = {
             'Aplicación para iOS y Android, con la licencia de publicación en Play Store incluida.',
         price_maintenance_title: 'Mantenimiento web',
         price_maintenance_desc: 'Actualizaciones de contenido, copias de seguridad y soporte continuo.',
+        promo_title: 'Promociones',
+        promo_desc:
+            '¿Tienes un código promocional? Compruébalo aquí y te lo aplicamos en el presupuesto. Válido para páginas web y apps; no aplica al mantenimiento.',
+        promo_label: 'Código promocional',
+        promo_submit: 'Comprobar',
+        promo_empty: 'Escribe un código para comprobarlo.',
+        promo_invalid: 'Ese código no es válido.',
+        promo_valid: '¡Es el código correcto! Disfruta de tu 10 % de descuento en páginas web y apps (no aplica al mantenimiento).',
         price_note:
             '¿Tu proyecto necesita algo distinto? Cuéntanoslo y te preparamos un presupuesto cerrado sin compromiso.',
         faq_title: 'Preguntas frecuentes sobre diseño web',
@@ -166,7 +177,9 @@ const translations = {
         about_title: 'Sobre ZetaWeb',
         about_subtitle: 'Conoce al equipo detrás de ZetaWeb',
         about_desc:
-            'Somos un equipo apasionado por la tecnología: Rubén Palacio e Ines Capdevila. Creamos páginas web y aplicaciones a medida para autónomos, pequeños negocios y empresas de Zaragoza, adaptándonos a lo que realmente necesitan y a lo que pueden gastarse. Nos gusta el trato directo: hablas con quien diseña y programa tu web, sin intermediarios ni departamentos de por medio. Cada cliente es para nosotros una oportunidad de aprender, crecer y aportar valor real a su negocio.',
+            'Somos un equipo pequeño y apasionado por la tecnología. Creamos páginas web y aplicaciones a medida para autónomos, pequeños negocios y empresas de Zaragoza, adaptándonos a lo que realmente necesitan y a lo que pueden gastarse. Nos gusta el trato directo: hablas con quien diseña y programa tu web, sin intermediarios ni departamentos de por medio. Cada cliente es para nosotros una oportunidad de aprender, crecer y aportar valor real a su negocio.',
+        ruben_name: 'Informático',
+        ines_name: 'Ayuda',
         ruben_role: 'Desarrollador Full Stack',
         ines_role: 'Desarrollo de Negocio y Redes Sociales',
         contact_title: 'Contacto',
@@ -197,6 +210,7 @@ const translations = {
         foot_projects: 'Proyectos de diseño web',
         foot_process: 'Cómo trabajamos',
         foot_pricing: 'Precios de páginas web',
+        foot_promos: 'Promociones',
         foot_faq: 'Preguntas frecuentes',
         foot_about: 'Sobre ZetaWeb',
         foot_contact: 'Contacto',
@@ -299,6 +313,8 @@ const translations = {
             'Website for a massage therapy centre in Zaragoza. The redesign is under way: you can compare the current site with the new version.',
         project_aranda_desc:
             'Website for a neighbourhood poultry shop and delicatessen in Zaragoza, with its products, opening hours and direct contact by phone or WhatsApp.',
+        project_gruas_desc:
+            'Website for a 24-hour towing and roadside assistance service, with its own domain, SEO and one-tap calling.',
         project_dominicos_desc:
             'Website for a basketball club in Zaragoza, with its teams and age groups, also being redesigned right now.',
         project_gestionateam_desc:
@@ -314,6 +330,7 @@ const translations = {
         tag_android: 'Android app',
         tag_pwa: 'PWA iOS / Android',
         tag_maintenance: 'Maintenance',
+        tag_seo: 'SEO',
         tag_redesign: 'Redesign in progress',
         process_title: 'How we work',
         process_subtitle: 'Four steps, no small print and no surprises on the invoice.',
@@ -342,6 +359,14 @@ const translations = {
         price_app_desc: 'An iOS and Android application, Play Store publishing licence included.',
         price_maintenance_title: 'Website maintenance',
         price_maintenance_desc: 'Content updates, backups and ongoing support.',
+        promo_title: 'Promotions',
+        promo_desc:
+            'Got a promo code? Check it here and we will apply it to your quote. Valid for websites and apps; it does not apply to maintenance.',
+        promo_label: 'Promo code',
+        promo_submit: 'Check',
+        promo_empty: 'Type a code to check it.',
+        promo_invalid: 'That code is not valid.',
+        promo_valid: 'That\'s the right code! Enjoy your 10% discount on websites and apps (maintenance not included).',
         price_note:
             'Need something different? Tell us about it and we will put together a fixed quote, no strings attached.',
         faq_title: 'Frequently asked questions about web design',
@@ -376,7 +401,9 @@ const translations = {
         about_title: 'About ZetaWeb',
         about_subtitle: 'Get to know the team behind ZetaWeb',
         about_desc:
-            'We are a team passionate about technology: Rubén Palacio and Ines Capdevila. We build tailor-made websites and apps for freelancers, small businesses and companies in Zaragoza, adapting to what they actually need and what they can spend. We like working directly: you talk to the people who design and code your site, with no middlemen and no departments in between. Each client is an opportunity for us to learn, grow and add real value to their business.',
+            'We are a small team passionate about technology. We build tailor-made websites and apps for freelancers, small businesses and companies in Zaragoza, adapting to what they actually need and what they can spend. We like working directly: you talk to the people who design and code your site, with no middlemen and no departments in between. Each client is an opportunity for us to learn, grow and add real value to their business.',
+        ruben_name: 'IT',
+        ines_name: 'Help',
         ruben_role: 'Full Stack Developer',
         ines_role: 'Business Development & Social Media',
         contact_title: 'Contact',
@@ -407,6 +434,7 @@ const translations = {
         foot_projects: 'Web design projects',
         foot_process: 'How we work',
         foot_pricing: 'Website prices',
+        foot_promos: 'Promotions',
         foot_faq: 'Frequently asked questions',
         foot_about: 'About ZetaWeb',
         foot_contact: 'Contact',
@@ -433,7 +461,7 @@ const WHATSAPP_URL =
 
 const contacts = {
     ruben: {
-        name: 'Rubén Palacio',
+        nameKey: 'ruben_name',
         whatsapp: WHATSAPP_URL,
         phone: '+34615906268',
         email: 'rubenpalsis11@gmail.com',
@@ -441,7 +469,7 @@ const contacts = {
         github: 'https://github.com/RubenPalSis'
     },
     ines: {
-        name: 'Ines Capdevila',
+        nameKey: 'ines_name',
         phone: '+34656766857',
         email: 'Inesgiga18@gmail.com'
         // TODO: añadir linkedin / instagram de Ines cuando estén disponibles.
@@ -734,6 +762,41 @@ function showToast(message, type = 'info') {
     toastTimer = window.setTimeout(() => toast.classList.remove('show'), 5000);
 }
 
+/* ---------- Promociones ---------- */
+// Descuento para webs y apps (no mantenimiento). Al validarse abre WhatsApp
+// con Rubén para que el cliente lo reclame.
+const PROMO_CODE = 'CHOLLOMETROWEB';
+const PROMO_WHATSAPP_URL = `https://wa.me/34615906268?text=${encodeURIComponent(
+    `Hola, tengo el código promocional ${PROMO_CODE}. Es el código correcto: quiero disfrutar de mi 10 % de descuento en mi web o app.`
+)}`;
+
+function handlePromoSubmit(event) {
+    event.preventDefault();
+    const input = $('#promo-code');
+    const result = $('#promo-result');
+    const code = input.value.trim().toUpperCase();
+
+    result.classList.remove('is-success', 'is-error');
+    if (!code) {
+        result.textContent = t('promo_empty');
+        result.classList.add('is-error');
+        input.setAttribute('aria-invalid', 'true');
+        return;
+    }
+    if (code !== PROMO_CODE) {
+        result.textContent = t('promo_invalid');
+        result.classList.add('is-error');
+        input.setAttribute('aria-invalid', 'true');
+        return;
+    }
+
+    input.removeAttribute('aria-invalid');
+    result.textContent = t('promo_valid');
+    result.classList.add('is-success');
+    // Dentro del propio submit para que el navegador no lo bloquee como popup.
+    window.open(PROMO_WHATSAPP_URL, '_blank', 'noopener');
+}
+
 /* ---------- Chat de contacto ---------- */
 const CHAT_ICONS = {
     whatsapp: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884',
@@ -816,7 +879,7 @@ function showContactOptions() {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'option-button';
-        button.textContent = contact.name;
+        button.textContent = t(contact.nameKey);
         button.addEventListener('click', () => selectContact(key));
         wrapper.appendChild(button);
     });
@@ -827,13 +890,13 @@ function showContactOptions() {
 
 function selectContact(key) {
     currentContact = contacts[key];
-    addMessage(currentContact.name, 'user');
+    addMessage(t(currentContact.nameKey), 'user');
     afterTyping(showContactMethods);
 }
 
 function showContactMethods() {
     const contact = currentContact;
-    addMessage(`${t('chat_contact_selected')} ${contact.name}. ${t('chat_contact_methods')}`, 'bot');
+    addMessage(`${t('chat_contact_selected')} ${t(contact.nameKey)}. ${t('chat_contact_methods')}`, 'bot');
 
     const wrapper = document.createElement('div');
     wrapper.className = 'contact-options';
@@ -857,7 +920,7 @@ function selectContactMethod(method) {
     const url = method.url(contact);
 
     addMessage(label, 'user');
-    afterTyping(() => showRedirectButton(label, url, contact.name));
+    afterTyping(() => showRedirectButton(label, url, t(contact.nameKey)));
 }
 
 function showRedirectButton(label, url, contactName) {
@@ -939,6 +1002,7 @@ function init() {
     initChat();
 
     $('#contact-form').addEventListener('submit', handleFormSubmit);
+    $('#promo-form').addEventListener('submit', handlePromoSubmit);
     $('#theme-toggle').addEventListener('click', toggleTheme);
     $('#mobile-theme-toggle').addEventListener('click', toggleTheme);
     $('#language-toggle').addEventListener('click', toggleLanguage);
