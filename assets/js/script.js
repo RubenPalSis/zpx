@@ -77,7 +77,10 @@ const translations = {
         projects_title: 'Proyectos de diseño web',
         projects_subtitle:
             'Portfolio de webs y aplicaciones publicadas y funcionando. Entra en cualquiera y juzga tú mismo.',
-        project_barber_desc: 'Diseño web para una barbería: sus servicios y el contacto siempre a la vista.',
+        projects_logos_label: 'Empresas con las que hemos trabajado',
+        projects_carousel_label: 'Proyectos',
+        carousel_prev: 'Proyectos anteriores',
+        carousel_next: 'Proyectos siguientes',
         project_tapicerias_desc:
             'Diseño web para una empresa de tapicería de Zaragoza, con sus trabajos, el presupuesto y un enlace directo a Instagram.',
         project_terma_desc:
@@ -287,7 +290,10 @@ const translations = {
         projects_title: 'Web design projects',
         projects_subtitle:
             'A portfolio of websites and apps that are live and running. Open any of them and judge for yourself.',
-        project_barber_desc: 'Web design for a barbershop: its services and contact details always in view.',
+        projects_logos_label: 'Businesses we have worked with',
+        projects_carousel_label: 'Projects',
+        carousel_prev: 'Previous projects',
+        carousel_next: 'Next projects',
         project_tapicerias_desc:
             'Web design for an upholstery company in Zaragoza, with their work, quotes and a direct link to Instagram.',
         project_terma_desc:
@@ -624,6 +630,37 @@ function initReveal() {
     items.forEach((item) => observer.observe(item));
 }
 
+/* ---------- Carrusel de proyectos ---------- */
+// Es una rueda: al llegar al final, "siguiente" vuelve al principio y viceversa.
+function initProjectCarousel() {
+    const viewport = $('.carousel-viewport');
+    if (!viewport) return;
+    const track = viewport.querySelector('.carousel-track');
+
+    const step = () => {
+        const card = track.firstElementChild;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        return card ? card.offsetWidth + gap : viewport.clientWidth;
+    };
+
+    const go = (dir) => {
+        const max = viewport.scrollWidth - viewport.clientWidth;
+        const atEnd = viewport.scrollLeft >= max - 4;
+        const atStart = viewport.scrollLeft <= 4;
+        let left = viewport.scrollLeft + dir * step();
+        if (dir > 0 && atEnd) left = 0;
+        if (dir < 0 && atStart) left = max;
+        viewport.scrollTo({ left, behavior: 'smooth' });
+    };
+
+    $('.carousel-prev').addEventListener('click', () => go(-1));
+    $('.carousel-next').addEventListener('click', () => go(1));
+    viewport.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') { event.preventDefault(); go(1); }
+        if (event.key === 'ArrowLeft') { event.preventDefault(); go(-1); }
+    });
+}
+
 /* ---------- Formulario de contacto ---------- */
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -951,6 +988,7 @@ function init() {
     initScrollSpy();
     initMobileMenu();
     initReveal();
+    initProjectCarousel();
     initChat();
 
     $('#contact-form').addEventListener('submit', handleFormSubmit);
