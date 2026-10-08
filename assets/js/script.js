@@ -18,7 +18,6 @@ const translations = {
         nav_process: 'Cómo trabajamos',
         nav_pricing: 'Tarifas',
         nav_faq: 'Preguntas',
-        nav_about: 'Nosotros',
         nav_contact: 'Contacto',
         hero_eyebrow: 'Diseño web en Zaragoza · Disponibles para nuevos proyectos',
         hero_title: 'Diseño de páginas web en Zaragoza',
@@ -174,21 +173,11 @@ const translations = {
         faq_9_q: '¿También hacéis aplicaciones móviles?',
         faq_9_a:
             'Sí, desarrollamos apps para iOS y Android desde 150 €, con la licencia de publicación en Play Store incluida. En el portfolio puedes ver BasketStats y GestionaTeam.',
-        about_title: 'Sobre ZetaWeb',
-        about_subtitle: 'Conoce al equipo detrás de ZetaWeb',
-        about_desc:
-            'Somos un equipo pequeño y apasionado por la tecnología. Creamos páginas web y aplicaciones a medida para autónomos, pequeños negocios y empresas de Zaragoza, adaptándonos a lo que realmente necesitan y a lo que pueden gastarse. Nos gusta el trato directo: hablas con quien diseña y programa tu web, sin intermediarios ni departamentos de por medio. Cada cliente es para nosotros una oportunidad de aprender, crecer y aportar valor real a su negocio.',
-        ruben_name: 'Informático',
-        ines_name: 'Ayuda',
-        ruben_role: 'Desarrollador Full Stack',
-        ines_role: 'Desarrollo de Negocio y Redes Sociales',
+        it_name: 'Informático',
+        help_name: 'Ayuda',
         contact_title: 'Contacto',
         contact_subtitle:
             'Cuéntanos tu proyecto por WhatsApp o rellena el formulario. Te respondemos normalmente en menos de 24 horas, sin compromiso.',
-        contact_info: 'Información de Contacto',
-        contact_portfolio: 'Portfolio online',
-        contact_area:
-            'Trabajamos con negocios de Zaragoza capital y alrededores, y también a distancia para el resto de Aragón.',
         form_send_message: 'Envíanos un mensaje',
         form_name: 'Nombre',
         form_email: 'Correo Electrónico',
@@ -212,7 +201,6 @@ const translations = {
         foot_pricing: 'Precios de páginas web',
         foot_promos: 'Promociones',
         foot_faq: 'Preguntas frecuentes',
-        foot_about: 'Sobre ZetaWeb',
         foot_contact: 'Contacto',
         footer_copyright: '© 2026 ZetaWeb. Todos los derechos reservados.',
         chat_open_label: '¿Hablamos? Abrir chat de contacto',
@@ -223,10 +211,6 @@ const translations = {
         chat_contact_methods: '¿Cómo deseas contactar?',
         chat_redirecting: 'Perfecto, abriendo',
         chat_open: 'Abrir',
-        chat_call: 'Llamar',
-        chat_email: 'Email',
-        chat_phone_call: 'Llamada telefónica',
-        chat_email_method: 'Correo electrónico',
         chat_of: 'de'
     },
 
@@ -244,7 +228,6 @@ const translations = {
         nav_process: 'How we work',
         nav_pricing: 'Pricing',
         nav_faq: 'FAQ',
-        nav_about: 'About',
         nav_contact: 'Contact',
         hero_eyebrow: 'Web design in Zaragoza · Available for new projects',
         hero_title: 'Web design in Zaragoza',
@@ -398,21 +381,11 @@ const translations = {
         faq_9_q: 'Do you also build mobile apps?',
         faq_9_a:
             'Yes, we develop iOS and Android apps from €150, with the Play Store publishing licence included. You can see BasketStats and GestionaTeam in the portfolio.',
-        about_title: 'About ZetaWeb',
-        about_subtitle: 'Get to know the team behind ZetaWeb',
-        about_desc:
-            'We are a small team passionate about technology. We build tailor-made websites and apps for freelancers, small businesses and companies in Zaragoza, adapting to what they actually need and what they can spend. We like working directly: you talk to the people who design and code your site, with no middlemen and no departments in between. Each client is an opportunity for us to learn, grow and add real value to their business.',
-        ruben_name: 'IT',
-        ines_name: 'Help',
-        ruben_role: 'Full Stack Developer',
-        ines_role: 'Business Development & Social Media',
+        it_name: 'IT',
+        help_name: 'Help',
         contact_title: 'Contact',
         contact_subtitle:
             'Tell us about your project on WhatsApp or fill in the form. We usually reply within 24 hours, no strings attached.',
-        contact_info: 'Contact Information',
-        contact_portfolio: 'Online portfolio',
-        contact_area:
-            'We work with businesses in Zaragoza and the surrounding area, and remotely across the rest of Aragón.',
         form_send_message: 'Send us a message',
         form_name: 'Name',
         form_email: 'Email',
@@ -436,7 +409,6 @@ const translations = {
         foot_pricing: 'Website prices',
         foot_promos: 'Promotions',
         foot_faq: 'Frequently asked questions',
-        foot_about: 'About ZetaWeb',
         foot_contact: 'Contact',
         footer_copyright: '© 2026 ZetaWeb. All rights reserved.',
         chat_open_label: 'Shall we talk? Open contact chat',
@@ -447,10 +419,6 @@ const translations = {
         chat_contact_methods: 'How would you like to get in touch?',
         chat_redirecting: 'Great, opening',
         chat_open: 'Open',
-        chat_call: 'Call',
-        chat_email: 'Email',
-        chat_phone_call: 'Phone call',
-        chat_email_method: 'Email',
         chat_of: 'for'
     }
 };
@@ -460,19 +428,13 @@ const WHATSAPP_URL =
     'https://wa.me/34615906268?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web';
 
 const contacts = {
-    ruben: {
-        nameKey: 'ruben_name',
-        whatsapp: WHATSAPP_URL,
-        phone: '+34615906268',
-        email: 'rubenpalsis11@gmail.com',
-        linkedin: 'https://www.linkedin.com/in/ruben-palacio-sisamon-4bb30425a/',
-        github: 'https://github.com/RubenPalSis'
+    it: {
+        nameKey: 'it_name',
+        whatsapp: WHATSAPP_URL
     },
-    ines: {
-        nameKey: 'ines_name',
-        phone: '+34656766857',
-        email: 'Inesgiga18@gmail.com'
-        // TODO: añadir linkedin / instagram de Ines cuando estén disponibles.
+    help: {
+        nameKey: 'help_name',
+        whatsapp: 'https://wa.me/34656766857?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20una%20p%C3%A1gina%20web'
     }
 };
 
@@ -764,7 +726,7 @@ function showToast(message, type = 'info') {
 
 /* ---------- Promociones ---------- */
 // Descuento para webs y apps (no mantenimiento). Al validarse abre WhatsApp
-// con Rubén para que el cliente lo reclame.
+// con el informático para que el cliente lo reclame.
 const PROMO_CODE = 'CHOLLOMETROWEB';
 const PROMO_WHATSAPP_URL = `https://wa.me/34615906268?text=${encodeURIComponent(
     `Hola, tengo el código promocional ${PROMO_CODE}. Es el código correcto: quiero disfrutar de mi 10 % de descuento en mi web o app.`
@@ -799,22 +761,12 @@ function handlePromoSubmit(event) {
 
 /* ---------- Chat de contacto ---------- */
 const CHAT_ICONS = {
-    whatsapp: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884',
-    phone: 'M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z',
-    email: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z',
-    linkedin: 'M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z',
-    github: 'M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z',
-    instagram: 'M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3z'
+    whatsapp: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884'
 };
 
 // Cada método se muestra sólo si el contacto tiene ese dato.
 const CHAT_METHODS = [
-    { key: 'whatsapp', label: () => 'WhatsApp', text: () => 'WhatsApp', url: (c) => c.whatsapp },
-    { key: 'phone', label: () => t('chat_call'), text: () => t('chat_phone_call'), url: (c) => `tel:${c.phone}` },
-    { key: 'email', label: () => t('chat_email'), text: () => t('chat_email_method'), url: (c) => `mailto:${c.email}` },
-    { key: 'linkedin', label: () => 'LinkedIn', text: () => 'LinkedIn', url: (c) => c.linkedin },
-    { key: 'instagram', label: () => 'Instagram', text: () => 'Instagram', url: (c) => c.instagram },
-    { key: 'github', label: () => 'GitHub', text: () => 'GitHub', url: (c) => c.github }
+    { key: 'whatsapp', label: () => 'WhatsApp', text: () => 'WhatsApp', url: (c) => c.whatsapp }
 ];
 
 function chatIcon(key) {
