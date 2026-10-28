@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ZetaWeb · Gestión</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co http://127.0.0.1:54321; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+    <meta name="theme-color" content="#0b1120">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="ZetaWeb">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/admin/manifest.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <script src="/admin/js/theme.js"></script>
+</head>
+
+<body>
+    <div id="app" aria-live="polite">
+        <div class="splash">
+            <svg viewBox="0 0 100 100" width="56" height="56" aria-hidden="true">
+                <rect width="100" height="100" rx="22" fill="#0b1120" />
+                <path d="M14 8 H86 V26 L48 74 H86 V92 H14 V74 L52 26 H14 Z" fill="#ffffff" />
+            </svg>
+            <p>Cargando ZetaWeb…</p>
+            <noscript>
+                <p>Esta aplicación necesita JavaScript.</p>
+            </noscript>
+        </div>
+    </div>
+    <div id="toasts" class="toasts" role="status" aria-live="polite"></div>
+    <script src="/admin/config.js"></script>
+    <script src="/admin/lib/supabase-2.117.3.js"></script>
+    <script type="module" src="/admin/js/app.js"></script>
+</body>
+
+</html>

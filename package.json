@@ -1,0 +1,19 @@
+{
+  "name": "zetaweb-admin",
+  "private": true,
+  "description": "Herramientas de desarrollo del panel /admin. La web se publica tal cual, sin compilación.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/unit/*.test.js\"",
+    "test:e2e": "node --test --test-concurrency=1 \"tests/e2e/*.test.js\"",
+    "test:db": "node --test --test-concurrency=1 \"tests/integration/*.test.js\"",
+    "db:start": "supabase start -x studio,imgproxy,edge-runtime,logflare,vector,realtime,storage-api,postgres-meta,supavisor",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "2.117.3",
+    "playwright": "1.64.1",
+    "supabase": "2.120.0"
+  }
+}
