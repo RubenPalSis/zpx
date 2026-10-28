@@ -65,7 +65,7 @@ function renderDetail(el, data, id) {
             <div class="actions">
                 <button class="btn btn-primary" data-act="charge" data-online>+ Cobro</button>
                 <button class="btn" data-act="edit" data-online>Editar</button>
-                ${charges.length ? '' : html`<button class="btn btn-danger" data-act="delete" data-online>Borrar</button>`}
+                <button class="btn btn-danger" data-act="delete" data-online>Borrar cliente</button>
             </div>
         </div>
         <div class="stats">
@@ -88,7 +88,10 @@ function renderDetail(el, data, id) {
     on('charge', () => openChargeForm(null, { client_id: id }));
     on('edit', () => openClientForm(c));
     on('delete', async () => {
-        const ok = await confirmDialog({ title: 'Borrar cliente', message: `¿Borrar a «${c.name}»?`, confirmLabel: 'Borrar', danger: true });
+        const extra = charges.length
+            ? ` Se borrarán también sus ${charges.length} ${charges.length === 1 ? 'cobro' : 'cobros'} y ${payments.length} ${payments.length === 1 ? 'pago registrado' : 'pagos registrados'}, que dejarán de contar en las estadísticas. No se puede deshacer.`
+            : '';
+        const ok = await confirmDialog({ title: 'Borrar cliente', message: `¿Borrar a «${c.name}»?${extra}`, confirmLabel: 'Borrar todo', danger: true });
         if (!ok) return;
         await withToast(async () => { await remove('clients', id); location.hash = '#/clientes'; await store.refresh(); }, 'Cliente borrado.');
     });

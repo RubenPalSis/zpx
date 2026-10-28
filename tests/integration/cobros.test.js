@@ -81,8 +81,7 @@ test('cobro mensual: validar pagos mes a mes sin duplicar', async () => {
     assert.match(wrong.error?.message ?? '', /Periodo no válido/);
     const before = await ruben.from('charge_payments').insert({ charge_id: id, period: '2025-12-31', amount_cents: 5000 });
     assert.ok(before.error, 'no se aceptan meses anteriores al inicio');
-    // Un cobro con pagos no se puede borrar (se para).
-    assert.ok((await ruben.from('charges').delete().eq('id', id)).error);
+    // Un cobro mensual se puede parar para que deje de pedirse.
     ok(await ruben.from('charges').update({ active: false }).eq('id', id));
     // Deshacer un pago.
     ok(await ines.from('charge_payments').delete().eq('id', p.id));
@@ -104,4 +103,13 @@ test('cerrar sesión corta el acceso; al volver los datos siguen', async () => {
     assert.ok((await c.from('clients').select('id')).error || true);
     const again = await login('ruben');
     assert.ok(ok(await again.from('clients').select('id')).length >= 3);
+});
+
+test('borrar un cliente elimina sus cobros y pagos', async () => {
+    const id = randomUUID();
+    ok(await ruben.rpc('new_charge', { ...base, p_id: id, p_new_client: `Borrar ${run}`, p_concept: 'Web', p_amount_cents: 1000, p_kind: 'unico', p_due_date: '2026-10-01', p_paid: true }));
+    const { client_id: cid } = ok(await ruben.from('charges').select('client_id').eq('id', id).single());
+    ok(await ines.from('clients').delete().eq('id', cid));
+    assert.equal(ok(await ruben.from('charges').select('id').eq('id', id)).length, 0);
+    assert.equal(ok(await ruben.from('charge_payments').select('id').eq('charge_id', id)).length, 0);
 });
