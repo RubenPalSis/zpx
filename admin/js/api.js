@@ -1,8 +1,6 @@
 // Acceso a Supabase. La base de datos es la única fuente de verdad: aquí no
 // se guarda nada en el navegador salvo la sesión que gestiona supabase-js.
 
-import { enrichObligations } from './lib/finance.js';
-import { todayISO } from './lib/dates.js';
 
 const cfg = window.ZW_CONFIG ?? {};
 export const configured = Boolean(cfg.supabaseUrl && cfg.supabaseAnonKey);
@@ -22,8 +20,8 @@ export function friendlyError(err) {
     if (!navigator.onLine) return 'No hay conexión. La operación no se ha guardado.';
     const msg = err.message ?? String(err);
     switch (err.code) {
-        case '23505': return 'Este registro ya existía (posible envío duplicado). No se ha creado otra vez.';
-        case '23503': return 'No se puede completar: hay otros registros relacionados.';
+        case '23505': return 'Ya estaba registrado. No se ha duplicado.';
+        case '23503': return 'No se puede borrar porque tiene cobros o pagos asociados.';
         case '23514': return 'Los datos no cumplen las reglas (importes, fechas o reparto incoherentes).';
         case '42501': return 'No tienes permiso para esta operación.';
         case 'PGRST301': case 'PGRST303': return 'La sesión ha caducado. Vuelve a iniciar sesión.';
@@ -59,13 +57,9 @@ export async function currentProfile() {
 // ---------- Datos ----------
 const TABLES = {
     clients: 'clients',
-    projects: 'projects',
-    obligations: 'payment_obligations',
-    payments: 'payments',
-    recurring: 'recurring_services',
-    expenses: 'expenses',
+    charges: 'charges',
+    payments: 'charge_payments',
     profiles: 'profiles',
-    settings: 'settings',
 };
 
 // Supabase devuelve como máximo 1000 filas por petición: se pagina.
@@ -81,7 +75,7 @@ async function fetchAll(table) {
     }
 }
 
-const NUMERIC = ['price_cents', 'amount_cents', 'ruben_cents', 'ines_cents', 'alloc_ruben_bp', 'period_months', 'recurrence_months', 'default_alloc_ruben_bp'];
+const NUMERIC = ['amount_cents', 'ruben_cents', 'ines_cents', 'day_of_month'];
 function normalize(row) {
     for (const k of NUMERIC) if (row[k] !== null && row[k] !== undefined) row[k] = Number(row[k]);
     return row;
@@ -95,15 +89,9 @@ export const store = {
     async load() {
         const entries = await Promise.all(Object.entries(TABLES).map(async ([key, table]) => [key, (await fetchAll(table)).map(normalize)]));
         const d = Object.fromEntries(entries);
-        d.settings = d.settings[0] ?? { default_alloc_mode: 'pct', default_alloc_ruben_bp: 5000 };
-        d.obligations = enrichObligations(d.obligations, d.payments, todayISO());
         d.byId = {
             clients: new Map(d.clients.map((x) => [x.id, x])),
-            projects: new Map(d.projects.map((x) => [x.id, x])),
-            obligations: new Map(d.obligations.map((x) => [x.id, x])),
-            recurring: new Map(d.recurring.map((x) => [x.id, x])),
-            expenses: new Map(d.expenses.map((x) => [x.id, x])),
-            profiles: new Map(d.profiles.map((x) => [x.id, x])),
+            charges: new Map(d.charges.map((x) => [x.id, x])),
         };
         this.data = d;
         this.loadedAt = Date.now();
@@ -124,26 +112,22 @@ export const store = {
     },
 };
 
-// Inserta (si la fila es nueva) o actualiza comprobando que nadie la ha
-// modificado entretanto. `original` es la fila tal como se cargó.
-export async function save(key, values, original) {
+export async function insert(key, values) {
     requireOnline();
-    const table = TABLES[key];
-    if (!original) {
-        return normalize(check(await sb.from(table).insert(values).select().single()));
-    }
-    const rows = check(await sb.from(table).update(values).eq('id', original.id).eq('updated_at', original.updated_at).select());
-    if (!rows.length) {
-        store.refresh().catch(() => {});
-        throw new AppError('Otra persona ha modificado este registro mientras lo editabas. No se ha guardado nada: cierra el formulario y vuelve a abrirlo para ver los datos actuales.');
-    }
+    return normalize(check(await sb.from(TABLES[key]).insert(values).select().single()));
+}
+
+export async function update(key, id, values) {
+    requireOnline();
+    const rows = check(await sb.from(TABLES[key]).update(values).eq('id', id).select());
+    if (!rows.length) throw new AppError('Este registro ya no existe. Recarga la página.');
     return normalize(rows[0]);
 }
 
 export async function remove(key, id) {
     requireOnline();
     const rows = check(await sb.from(TABLES[key]).delete().eq('id', id).select('id'));
-    if (!rows.length) throw new AppError('No se ha podido eliminar el registro.');
+    if (!rows.length) throw new AppError('No se ha podido eliminar.');
 }
 
 export async function rpc(name, args) {
@@ -151,18 +135,8 @@ export async function rpc(name, args) {
     return check(await sb.rpc(name, args));
 }
 
-export async function updateSettings(values) {
-    requireOnline();
-    return check(await sb.from('settings').update({ ...values, updated_at: new Date().toISOString() }).eq('id', 1).select().single());
-}
-
-export async function auditFor(rowIds) {
-    if (!rowIds.length) return [];
-    return check(await sb.from('audit_log').select('id, table_name, row_id, action, changed_by, changed_at').in('row_id', rowIds).order('changed_at', { ascending: false }).limit(50));
-}
-
 export async function exportAll() {
     const out = { exportado: new Date().toISOString() };
-    for (const table of [...Object.values(TABLES), 'audit_log']) out[table] = await fetchAll(table);
+    for (const table of Object.values(TABLES)) out[table] = await fetchAll(table);
     return out;
 }

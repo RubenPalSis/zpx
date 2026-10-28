@@ -1,34 +1,26 @@
 # Panel de gestión de ZetaWeb (`/admin`)
 
-Herramienta interna para Rubén e Inés: clientes, proyectos, obligaciones de pago y cobros, cuotas recurrentes, gastos, previsión, estadísticas y reparto entre socios.
+Herramienta interna para Rubén e Inés con tres apartados:
+
+- **Cobros** (pantalla principal): lo que hay que cobrar hoy, con un botón **✓ Pagado** en cada uno; los próximos 30 días; la lista de cobros; y los últimos pagos con «Deshacer».
+  - **Una vez:** importe y fecha. Al crearlo se puede marcar «Ya está pagado».
+  - **Cada mes:** importe y día del mes. Cada mes aparece en «Por cobrar» al llegar ese día y se valida con ✓. Si no se paga, sigue ahí en rojo indicando los días de retraso. «Parar» hace que deje de pedirse.
+  - **Para:** Ambos, Rubén o Inés. «Ambos» se reparte a medias.
+- **Clientes:** lista con lo que debe cada uno y ficha con sus cobros y pagos. Los clientes también se pueden crear directamente desde «Nuevo cobro».
+- **Estadísticas:** cobrado, por cobrar, ingreso mensual y previsión anual, el reparto Rubén/Inés, un gráfico por meses y los mejores clientes. Desde aquí se descarga también la copia de seguridad.
 
 ## Arquitectura
 
-| Pieza | Qué es | Dónde |
-|---|---|---|
-| Frontend | HTML + JS nativo (módulos ES), sin compilación, PWA | `admin/` → se publica en GitHub Pages junto a la web |
-| Base de datos y autenticación | Supabase (Postgres + Auth), plan gratuito | `supabase/migrations/` |
-| Seguridad | RLS en todas las tablas: solo las cuentas vinculadas en `profiles` acceden | migración |
-
-- La web es estática (GitHub Pages, sin PHP ni backend), así que el backend es externo: Supabase.
-- Todos los importes se guardan en **céntimos enteros**.
-- Cada operación guarda **su propio reparto** (`ruben_cents` / `ines_cents`). La base de datos obliga a que sume exactamente el total.
-- **Redondeo:** la parte de Rubén se redondea al céntimo con la regla "mitad al par" e Inés recibe el resto. Los cobros parciales se reparten de forma acumulada, así que al saldar una obligación la suma coincide exactamente con el reparto acordado.
-- **Operaciones de varios pasos** (cobro con exceso, generación de cuotas, periodo de un gasto recurrente): son funciones SQL transaccionales.
-- **Duplicados:**
-  - Cada formulario envía un identificador único, así que pulsar dos veces no crea dos registros.
-  - Una cuota no puede generar dos veces el mismo periodo.
-  - Una referencia de factura no se puede repetir.
-  - Avisa ante cobros o gastos idénticos.
-- **Historial:** `audit_log` registra quién crea, modifica o elimina cada registro.
-- **Borrado:** clientes, proyectos y cuotas no se borran, se archivan o cancelan. Una obligación con cobros no se puede borrar ni anular.
-- **Ediciones simultáneas:** si los dos editáis el mismo registro a la vez, el segundo guardado se rechaza en lugar de sobrescribir el primero.
-- **Visibilidad:** el panel lleva `noindex, nofollow` y no está enlazado desde la web ni en el sitemap. A propósito no aparece en `robots.txt`, que es público.
+- **Frontend:** HTML y JS nativo, sin compilación, instalable como PWA, en `admin/`. GitHub Pages lo publica junto a la web.
+- **Datos y acceso:** Supabase (Postgres y Auth, plan gratuito). El esquema está en `supabase/migrations/20261028100000_esquema.sql`.
+- **Seguridad:** RLS en todas las tablas. Solo las cuentas vinculadas en `profiles` pueden leer o escribir, y el registro público está desactivado.
+- **Importes y duplicados:** los importes se guardan en céntimos. Un mismo mes no se puede marcar como pagado dos veces, y un cobro con pagos no se puede borrar (solo parar).
+- **Visibilidad:** el panel lleva `noindex, nofollow` y no tiene enlaces desde la web ni aparece en el sitemap ni en `robots.txt`.
 
 ## Puesta en marcha (una sola vez)
 
 1. **Crear el proyecto** en <https://supabase.com> (plan Free), región UE (p. ej. Frankfurt). No hace falta tarjeta.
-2. **Crear el esquema:** en SQL Editor, pega y ejecuta `supabase/migrations/20261028100000_esquema_inicial.sql`.
+2. **Crear el esquema:** en SQL Editor, pega y ejecuta `supabase/migrations/20261028100000_esquema.sql`. Si ya ejecutaste la versión anterior, ejecuta este igualmente: la sustituye y conserva las cuentas vinculadas.
 3. **Ajustar la autenticación** en Authentication:
    - Sign In / Providers → Email: desactiva **"Allow new users to sign up"**.
    - URL Configuration → Site URL: `https://zetaweb.es/admin/`.
@@ -49,7 +41,7 @@ El servidor de correo incluido en el plan gratuito de Supabase envía muy pocos 
 
 ## Copias de seguridad
 
-- **Desde el panel:** en Configuración → *Exportar todo (JSON)* descargas todas las tablas y el historial. Hazlo periódicamente (p. ej. una vez al mes) y guárdalo en un sitio privado.
+- **Desde el panel:** en Estadísticas → *Descargar copia de seguridad (JSON)* descargas todas las tablas y el historial. Hazlo periódicamente (p. ej. una vez al mes) y guárdalo en un sitio privado.
 - **Copia completa de la base de datos** (requiere la contraseña de la base de datos):
   `npx supabase db dump --db-url "postgresql://…" -f copia.sql` (y `--data-only` para solo datos).
 - **Restaurar:** en un proyecto nuevo, ejecuta la migración y después importa los datos con `psql` desde el volcado.
@@ -78,7 +70,7 @@ npm test                      # cálculos: repartos, redondeo, previsiones (sin 
 # Supabase local desechable (Docker) + pasarela + web en :8080
 tests/stack/start.sh
 node tests/stack/gateway.mjs &
-npm run test:db               # API real: login, RLS, cobros, cuotas, gastos, duplicados, auditoría
+npm run test:db               # API real: login, RLS, cobros únicos y mensuales, duplicados
 npx playwright install chromium
 npm run test:e2e              # navegador: flujo completo, móvil, PWA, sin conexión
 tests/stack/reset-db.sh       # vaciar la base de pruebas
@@ -86,10 +78,7 @@ tests/stack/reset-db.sh       # vaciar la base de pruebas
 
 `supabase start` (la CLI oficial) también vale donde funcione el DNS interno de Docker. Para ello están `supabase/config.toml` y los scripts `npm run db:*`.
 
-## Pendiente o fuera de esta versión
+## Fuera de esta versión
 
-- No hay facturación electrónica, IVA, IRPF, contabilidad oficial ni pasarela de pago.
+- No hay facturación, impuestos, gastos ni pasarela de pago.
 - No hay edición sin conexión: sin red se puede consultar la pantalla abierta, pero no guardar.
-- Las cuotas no generan sus obligaciones automáticamente: el panel avisa y se generan con un botón. Así no se crea nada sin que lo veáis.
-- No se registra en qué cuenta entró cada cobro. La compensación entre socios por gastos adelantados se calcula de forma informativa.
-- Los datos se refrescan al volver a la pestaña, no en tiempo real.

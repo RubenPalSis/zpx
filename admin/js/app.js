@@ -4,45 +4,17 @@ import { sb, configured, currentProfile, store, friendlyError } from './api.js';
 import { html, raw, paint, $, $$, toast } from './ui.js';
 import { syncOnline } from './forms.js';
 import { pruneCharts } from './charts.js';
-import { PARTNER_LABEL } from './lib/alloc.js';
 
-import * as dashboard from './views/dashboard.js';
+import * as cobros from './views/cobros.js';
 import * as clients from './views/clients.js';
-import * as projects from './views/projects.js';
-import * as income from './views/income.js';
-import * as recurring from './views/recurring.js';
-import * as expenses from './views/expenses.js';
-import * as forecast from './views/forecast.js';
 import * as stats from './views/stats.js';
-import * as partners from './views/partners.js';
-import * as settings from './views/settings.js';
 
 const app = document.getElementById('app');
 
-const ICONS = {
-    dashboard: '<path d="M3 13h8V3H3zm10 8h8V11h-8zM3 21h8v-6H3zm10-18v6h8V3z"/>',
-    clientes: '<path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm0 2c-2.7 0-8 1.3-8 4v3h8v-3c0-1 .4-2 1.2-2.8A13 13 0 0 0 8 13zm8 0c-2.7 0-8 1.3-8 4v3h16v-3c0-2.7-5.3-4-8-4z"/>',
-    proyectos: '<path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8z"/>',
-    cobros: '<path d="M2 6h20v12H2zm10 9a3 3 0 1 0-3-3 3 3 0 0 0 3 3z"/>',
-    cuotas: '<path d="M12 4V1L8 5l4 4V6a6 6 0 0 1 6 6 6 6 0 0 1-.7 2.8l1.5 1.5A8 8 0 0 0 12 4zm0 14a6 6 0 0 1-6-6 6 6 0 0 1 .7-2.8L5.2 7.7A8 8 0 0 0 12 20v3l4-4-4-4z"/>',
-    gastos: '<path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4H4V6h16z"/>',
-    prevision: '<path d="M3 17l6-6 4 4 8-8v4h2V3h-8v2h4l-6 6-4-4-8 8z"/>',
-    estadisticas: '<path d="M5 9h3v11H5zm5.5-5h3v16h-3zM16 13h3v7h-3z"/>',
-    socios: '<path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z"/>',
-    configuracion: '<path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.4-2.5 1a7 7 0 0 0-1.7-1L15 3h-4l-.4 2.6a7 7 0 0 0-1.7 1l-2.5-1-2 3.4L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.4 2.5-1a7 7 0 0 0 1.7 1L11 21h4l.4-2.6a7 7 0 0 0 1.7-1l2.5 1 2-3.4zM13 15.5A3.5 3.5 0 1 1 16.5 12 3.5 3.5 0 0 1 13 15.5z"/>',
-};
-
 const ROUTES = [
-    { path: '', label: 'Dashboard', icon: 'dashboard', view: dashboard },
-    { path: 'clientes', label: 'Clientes', icon: 'clientes', view: clients },
-    { path: 'proyectos', label: 'Proyectos', icon: 'proyectos', view: projects },
-    { path: 'cobros', label: 'Ingresos y cobros', icon: 'cobros', view: income },
-    { path: 'cuotas', label: 'Cuotas recurrentes', icon: 'cuotas', view: recurring },
-    { path: 'gastos', label: 'Gastos', icon: 'gastos', view: expenses },
-    { path: 'prevision', label: 'Previsión económica', icon: 'prevision', view: forecast },
-    { path: 'estadisticas', label: 'Estadísticas', icon: 'estadisticas', view: stats },
-    { path: 'socios', label: 'Reparto entre socios', icon: 'socios', view: partners },
-    { path: 'configuracion', label: 'Configuración', icon: 'configuracion', view: settings },
+    { path: '', label: 'Cobros', view: cobros, icon: '<path d="M2 6h20v12H2zm10 9a3 3 0 1 0-3-3 3 3 0 0 0 3 3z"/>' },
+    { path: 'clientes', label: 'Clientes', view: clients, icon: '<path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm0 2c-2.7 0-8 1.3-8 4v3h8v-3c0-1 .4-2 1.2-2.8A13 13 0 0 0 8 13zm8 0c-2.7 0-8 1.3-8 4v3h16v-3c0-2.7-5.3-4-8-4z"/>' },
+    { path: 'estadisticas', label: 'Estadísticas', view: stats, icon: '<path d="M5 9h3v11H5zm5.5-5h3v16h-3zM16 13h3v7h-3z"/>' },
 ];
 
 const LOGO = raw('<svg viewBox="0 0 100 100" width="32" height="32" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#3b6fe0"/><path d="M14 8 H86 V26 L48 74 H86 V92 H14 V74 L52 26 H14 Z" fill="#fff"/></svg>');
@@ -161,88 +133,35 @@ function currentRoute() {
 }
 
 function shell() {
-    const name = session.profile.display_name || PARTNER_LABEL[session.profile.partner];
-    paint(app, html`<div class="layout" id="layout">
-        <aside class="sidebar" id="sidebar" aria-label="Menú principal">
-            <div class="brand">${LOGO}<div>ZetaWeb<small>Panel de gestión</small></div></div>
-            <nav class="nav">${ROUTES.map((r) => html`<a href="#/${r.path}" data-path="${r.path}">
-                ${raw(`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${ICONS[r.icon]}</svg>`)}${r.label}</a>`)}</nav>
-            <div class="sidebar-foot">
-                <span>Sesión: <strong>${name}</strong></span>
-                <button type="button" id="logout">Cerrar sesión</button>
-            </div>
-        </aside>
-        <div class="scrim" id="scrim"></div>
-        <div class="main">
-            <div class="offline-banner" id="offline" hidden>Sin conexión: puedes consultar la pantalla actual, pero no se pueden guardar cambios.</div>
-            <header class="topbar">
-                <button class="icon-btn menu-btn" id="menu" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">☰</button>
-                <strong id="page-title"></strong>
-                <span class="spacer"></span>
-                <div class="actions quick">
-                    <button class="btn btn-sm" data-quick="client" data-online>+ Cliente</button>
-                    <button class="btn btn-sm" data-quick="project" data-online>+ Proyecto</button>
-                    <button class="btn btn-sm" data-quick="payment" data-online>+ Cobro</button>
-                    <button class="btn btn-sm" data-quick="expense" data-online>+ Gasto</button>
-                </div>
-                <button class="icon-btn" id="theme" aria-label="Cambiar tema claro u oscuro">◐</button>
-            </header>
-            <main class="content" id="view"></main>
-        </div>
-        <button class="fab" id="fab" aria-label="Añadir" aria-expanded="false" data-online>+</button>
-        <div class="quick-menu" id="quick-menu" hidden>
-            <button class="btn" data-quick="client">Añadir cliente</button>
-            <button class="btn" data-quick="project">Crear proyecto</button>
-            <button class="btn" data-quick="payment">Registrar cobro</button>
-            <button class="btn" data-quick="expense">Añadir gasto</button>
-        </div>
+    paint(app, html`<div class="app">
+        <header class="topbar">
+            <a href="#/" class="brand">${LOGO}<span>ZetaWeb</span></a>
+            <nav class="tabbar" aria-label="Secciones">${ROUTES.map((r) => html`<a href="#/${r.path}" data-path="${r.path}">
+                ${raw(`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${r.icon}</svg>`)}<span>${r.label}</span></a>`)}</nav>
+            <span class="spacer"></span>
+            <button class="icon-btn" id="theme" aria-label="Cambiar tema claro u oscuro">${raw('<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.4A5.5 5.5 0 0 1 12.4 3.1 9 9 0 0 0 12 3z"/></svg>')}</button>
+            <button class="btn btn-sm" id="logout">Salir</button>
+        </header>
+        <div class="offline-banner" id="offline" hidden>Sin conexión: no se pueden guardar cambios.</div>
+        <main class="content" id="view"></main>
     </div>`);
-
-    const layout = $('#layout');
-    const toggleNav = (open) => {
-        layout.classList.toggle('nav-open', open);
-        $('#menu').setAttribute('aria-expanded', String(open));
-    };
-    $('#menu').addEventListener('click', () => toggleNav(!layout.classList.contains('nav-open')));
-    $('#scrim').addEventListener('click', () => toggleNav(false));
-    $('#sidebar').addEventListener('click', (e) => { if (e.target.closest('a')) toggleNav(false); });
     $('#logout').addEventListener('click', logout);
     $('#theme').addEventListener('click', () => {
         const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = next;
         try { localStorage.setItem('zetaweb-theme', next); } catch { /* sin almacenamiento */ }
     });
-    const quickMenu = $('#quick-menu');
-    $('#fab').addEventListener('click', () => {
-        quickMenu.hidden = !quickMenu.hidden;
-        $('#fab').setAttribute('aria-expanded', String(!quickMenu.hidden));
-    });
-    layout.addEventListener('click', (e) => {
-        const q = e.target.closest('[data-quick]');
-        if (!q) return;
-        quickMenu.hidden = true;
-        quick(q.dataset.quick);
-    });
     updateOnline();
-}
-
-function quick(kind) {
-    if (!navigator.onLine) return toast('Sin conexión: no se pueden añadir datos.', 'error');
-    if (kind === 'client') clients.openClientForm();
-    if (kind === 'project') projects.openProjectForm();
-    if (kind === 'payment') income.openPaymentForm();
-    if (kind === 'expense') expenses.openExpenseForm();
 }
 
 let renderSeq = 0;
 async function renderRoute() {
     if (!session) return;
     const { route, params } = currentRoute();
-    for (const a of $$('.nav a')) {
+    for (const a of $$('.tabbar a')) {
         if (a.dataset.path === route.path) a.setAttribute('aria-current', 'page');
         else a.removeAttribute('aria-current');
     }
-    $('#page-title').textContent = route.label;
     document.title = `${route.label} · ZetaWeb`;
     const el = $('#view');
     const seq = ++renderSeq;

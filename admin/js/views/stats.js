@@ -1,70 +1,81 @@
-import { html, paint, eur, stat, LABELS, $ } from '../ui.js';
-import { periodSummary, groupSum, recurringMonthly } from '../lib/finance.js';
-import { todayISO, inRange } from '../lib/dates.js';
-import { sum } from '../lib/money.js';
-import { periodState, resolvePeriod, periodFilter, periodLabel, bindFilters, clientName } from './common.js';
+import { html, paint, eur, stat, $ } from '../ui.js';
+import { chart } from '../charts.js';
+import { withToast } from '../forms.js';
+import { exportAll } from '../api.js';
+import { unpaid, sumUnpaid, collected, monthlyTotal, byMonth } from '../lib/cobros.js';
+import { todayISO, monthStart, monthEnd, addPeriod, monthsBetween, monthLabel } from '../lib/dates.js';
 
-const state = periodState('anio');
+const PERIODS = { mes: 'Este mes', anio: 'Este año', doce: 'Últimos 12 meses' };
+const state = { period: 'anio' };
+
+function range(today) {
+    if (state.period === 'mes') return [monthStart(today), monthEnd(today)];
+    if (state.period === 'anio') return [`${today.slice(0, 4)}-01-01`, `${today.slice(0, 4)}-12-31`];
+    return [addPeriod(monthStart(today), -11, 1), monthEnd(today)];
+}
 
 export async function render({ el, data }) {
     const today = todayISO();
-    const [from, to] = resolvePeriod(state, today);
-    const s = periodSummary(data, from, to, today);
-    const mrr = recurringMonthly(data.recurring, today);
-    const payments = data.payments.filter((p) => inRange(p.paid_on, from, to));
-    const paidExpenses = data.expenses.filter((e) => e.status === 'pagado' && inRange(e.paid_on, from, to));
+    const [from, to] = range(today);
+    const got = collected(data.payments, from, to);
+    const due = sumUnpaid(unpaid(data.charges, data.payments, '0000-01-01', today));
+    const mrr = monthlyTotal(data.charges);
+    const keys = monthsBetween(state.period === 'mes' ? addPeriod(monthStart(today), -11, 1) : from, state.period === 'anio' ? monthEnd(today) : to);
+    const series = byMonth(data.payments, keys);
 
-    const obOf = (p) => data.byId.obligations.get(p.obligation_id);
-    const byClient = groupSum(payments, (p) => p.client_id, (p) => p.amount_cents);
-    const byProject = groupSum(payments, (p) => obOf(p)?.project_id ?? '', (p) => p.amount_cents);
-    const byType = groupSum(payments, (p) => {
-        const o = obOf(p);
-        const proj = o?.project_id ? data.byId.projects.get(o.project_id) : null;
-        if (proj) return LABELS.service_type[proj.service_type];
-        return o?.recurring_service_id ? 'Cuotas recurrentes (sin proyecto)' : 'Sin proyecto';
-    }, (p) => p.amount_cents);
-    const byCategory = groupSum(paidExpenses, (e) => e.category, (e) => e.amount_cents);
-    const total = sum(payments, (p) => p.amount_cents);
-    const pct = (v, t) => (t ? `${Math.round((v / t) * 100)} %` : '—');
-
-    const table = (title, rows, labelFn, t) => html`<section class="card"><h2>${title}</h2>
-        ${rows.length ? html`<div class="table-wrap"><table><tbody>${rows.map((r) => html`<tr><td>${labelFn(r.key)}</td><td class="num muted">${pct(r.value, t)}</td><td class="num">${eur(r.value)}</td></tr>`)}</tbody>
-            <tfoot><tr><td>Total</td><td></td><td class="num">${eur(t)}</td></tr></tfoot></table></div>`
-        : html`<p class="muted">Sin datos en el periodo.</p>`}</section>`;
+    const byClient = new Map();
+    for (const p of data.payments) {
+        if (p.paid_on < from || p.paid_on > to) continue;
+        const cid = data.byId.charges.get(p.charge_id)?.client_id;
+        byClient.set(cid, (byClient.get(cid) ?? 0) + p.amount_cents);
+    }
+    const top = [...byClient.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
 
     paint(el, html`
         <div class="page-head">
-            <div><h1>Estadísticas</h1><p>${periodLabel(from, to)}</p></div>
-            <div class="filters m0" id="filters">${periodFilter(state)}</div>
+            <h1>Estadísticas</h1>
+            <div class="tabs" role="group" aria-label="Periodo" id="period">
+                ${Object.entries(PERIODS).map(([k, l]) => html`<button type="button" data-p="${k}" aria-pressed="${state.period === k}">${l}</button>`)}
+            </div>
         </div>
-        <div class="notice">El <strong>resultado de caja</strong> es lo cobrado menos lo pagado en el periodo. No es un beneficio contable oficial ni un importe neto de impuestos.
-            La <strong>facturación registrada</strong> son las obligaciones de pago emitidas en el periodo, se hayan cobrado o no.</div><p></p>
         <div class="stats">
-            ${stat('Facturación registrada', eur(s.invoiced.total), { hint: 'Obligaciones emitidas en el periodo' })}
-            ${stat('Cobros reales', eur(s.collected.total), { tone: 'ok' })}
-            ${stat('Cobros pendientes', eur(s.pendingInPeriod.total), { hint: 'Con vencimiento en el periodo' })}
-            ${stat('Cobros vencidos (hoy)', eur(s.overdue.total), { tone: s.overdue.total ? 'bad' : '' })}
-            ${stat('Gastos pagados', eur(s.expensesPaid.total))}
-            ${stat('Gastos pendientes', eur(s.expensesPending.total))}
-            ${stat('Resultado simplificado de caja', eur(s.cash.total), { tone: s.cash.total < 0 ? 'bad' : 'ok' })}
-            ${stat('Ingresos recurrentes mensuales', eur(mrr.total))}
-            ${stat('Previsión anual recurrente', eur(mrr.total * 12), { hint: 'Cuotas activas × 12 meses' })}
+            ${stat(`Cobrado (${PERIODS[state.period].toLowerCase()})`, eur(got.total), { tone: 'ok' })}
+            ${stat('Por cobrar hoy', eur(due.total), { tone: due.total ? 'bad' : '' })}
+            ${stat('Cobros mensuales', eur(mrr.total), { hint: 'Cobros «cada mes» activos' })}
+            ${stat('Previsión anual mensuales', eur(mrr.total * 12), { hint: 'Mensuales × 12' })}
         </div>
-        <section class="card"><h2>Importes atribuidos a cada socio</h2>
-            <div class="table-wrap"><table class="responsive">
+        <section class="card"><h2>Rubén e Inés</h2>
+            <div class="table-wrap"><table>
                 <thead><tr><th></th><th class="num"><span class="swatch s1"></span>Rubén</th><th class="num"><span class="swatch s2"></span>Inés</th><th class="num">Total</th></tr></thead>
                 <tbody>
-                    ${[['Facturación registrada', s.invoiced], ['Cobrado', s.collected], ['Pendiente (vence en el periodo)', s.pendingInPeriod], ['Gastos pagados asumidos', s.expensesPaid], ['Resultado de caja', s.cash]].map(([l, v]) =>
-                        html`<tr><td>${l}</td><td data-label="Rubén" class="num">${eur(v.ruben)}</td><td data-label="Inés" class="num">${eur(v.ines)}</td><td data-label="Total" class="num">${eur(v.total)}</td></tr>`)}
+                    <tr><td>Cobrado</td><td class="num">${eur(got.ruben)}</td><td class="num">${eur(got.ines)}</td><td class="num">${eur(got.total)}</td></tr>
+                    <tr><td>Por cobrar</td><td class="num">${eur(due.ruben)}</td><td class="num">${eur(due.ines)}</td><td class="num">${eur(due.total)}</td></tr>
+                    <tr><td>Cada mes</td><td class="num">${eur(mrr.ruben)}</td><td class="num">${eur(mrr.ines)}</td><td class="num">${eur(mrr.total)}</td></tr>
                 </tbody></table></div>
+            <p class="muted small m0">Reparto interno según el «Para» de cada cobro. «Ambos» se divide a medias.</p>
         </section>
-        <p></p>
-        <div class="grid-2">
-            ${table('Ingresos cobrados por cliente', byClient, (k) => clientName(data, k), total)}
-            ${table('Ingresos cobrados por proyecto', byProject, (k) => (k ? data.byId.projects.get(k)?.name ?? '—' : 'Sin proyecto'), total)}
-            ${table('Ingresos cobrados por tipo de servicio', byType, (k) => k, total)}
-            ${table('Gastos pagados por categoría', byCategory, (k) => LABELS.expense_category[k], sum(paidExpenses, (e) => e.amount_cents))}
-        </div>`);
+        <section class="card"><h2>Cobrado por mes</h2>
+            ${chart({ title: 'Cobrado por mes, Rubén e Inés', labels: series.map((r) => monthLabel(r.key)), series: [
+                { name: 'Rubén', values: series.map((r) => r.ruben), cls: 's1' },
+                { name: 'Inés', values: series.map((r) => r.ines), cls: 's2' }] })}
+        </section>
+        <section class="card"><h2>Mejores clientes</h2>
+            ${top.length ? html`<ul class="rows">${top.map(([cid, v]) => html`<li><div class="who"><a class="row-link" href="#/clientes/${cid}"><strong>${data.byId.clients.get(cid)?.name ?? '—'}</strong></a></div><div class="amount">${eur(v)}</div></li>`)}</ul>`
+                : html`<p class="muted m0">Sin cobros en este periodo.</p>`}
+        </section>
+        <p><button class="btn btn-sm" data-act="export" data-online>Descargar copia de seguridad (JSON)</button></p>`);
 
-    bindFilters($('#filters', el), state, () => render({ el, data }));
+    $('#period', el).addEventListener('click', (e) => {
+        const b = e.target.closest('[data-p]');
+        if (b) { state.period = b.dataset.p; render({ el, data }); }
+    });
+    el.querySelector('[data-act="export"]').addEventListener('click', () => withToast(async () => {
+        const dump = await exportAll();
+        const url = URL.createObjectURL(new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' }));
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `zetaweb-copia-${today}.json`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }, 'Copia descargada.'));
 }

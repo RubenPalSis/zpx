@@ -1,7 +1,7 @@
 // Service worker del panel. Solo guarda en caché los archivos de la propia
 // aplicación (HTML, CSS, JS, iconos). Las peticiones a Supabase (datos
 // económicos y sesión) no pasan nunca por la caché.
-const VERSION = 'zw-admin-v1';
+const VERSION = 'zw-admin-v2';
 const SHELL = [
     '/admin/',
     '/admin/index.html',
@@ -16,19 +16,10 @@ const SHELL = [
     '/admin/js/forms.js',
     '/admin/js/lib/money.js',
     '/admin/js/lib/dates.js',
-    '/admin/js/lib/alloc.js',
-    '/admin/js/lib/finance.js',
-    '/admin/js/views/common.js',
-    '/admin/js/views/dashboard.js',
+    '/admin/js/lib/cobros.js',
+    '/admin/js/views/cobros.js',
     '/admin/js/views/clients.js',
-    '/admin/js/views/projects.js',
-    '/admin/js/views/income.js',
-    '/admin/js/views/recurring.js',
-    '/admin/js/views/expenses.js',
-    '/admin/js/views/forecast.js',
     '/admin/js/views/stats.js',
-    '/admin/js/views/partners.js',
-    '/admin/js/views/settings.js',
     '/admin/manifest.webmanifest',
     '/favicon.svg',
     '/icon-192.png',
